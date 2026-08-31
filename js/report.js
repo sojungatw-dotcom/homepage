@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const resources = {
     oryukdo: {
-      number: '01', title: '오륙도 스카이 워크', type: '자연 관광', visual: 'ORYUKDO · COASTAL VIEW',
+      number: '01', title: '오륙도', type: '자연 관광', visual: 'ORYUKDO · COASTAL VIEW',
       description: '오륙도는 부산 남구 용호동 앞바다에 자리한 여섯 개의 바위섬으로, 보는 방향과 위치에 따라 다섯 개 또는 여섯 개로 보여 이름이 붙었습니다. 탁 트인 바다와 기암절벽이 어우러진 부산의 대표적인 해안 경관으로, 오륙도 스카이 워크와 해안 산책로를 함께 즐길 수 있습니다.',
       tags: ['#오륙도', '#오륙도스카이워크', '#부산바다', '#해안산책로', '#해맞이공원'],
       location: '부산광역시 남구 오륙도로 137', visit: '09:00—18:00 · 17:50 입장 마감 · 맑은 날 추천',
@@ -22,17 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     beomeosa: {
       number: '02', title: '범어사 템플 스테이', type: '체험형 관광', visual: 'BEOMEOSA · TEMPLE STAY',
-      description: '금정산 자락의 천년고찰 범어사에서 수행문화와 자연을 함께 경험하는 체류형 관광자원입니다. 예불과 명상, 사찰 안내 등으로 구성된 체험형·휴식형·당일형 프로그램을 통해 바쁜 일상에서 잠시 벗어나 자신을 돌아보는 시간을 가질 수 있습니다.',
-      tags: ['#범어사', '#템플스테이', '#부산사찰', '#명상', '#마음여행'],
+      description: '신라 문무왕 18년인 678년 의상대사가 창건한 범어사는 금정산의 숲과 천년 불교문화가 어우러진 부산의 대표 수행 사찰입니다. 하늘에서 내려온 금빛 물고기 설화와 함께 선명상·공양·차담 등을 경험하며 일상의 속도를 잠시 늦출 수 있습니다.',
+      tags: ['#범어사', '#범어사템플스테이', '#부산힐링여행', '#사찰여행', '#마음쉼여행'],
       location: '부산광역시 금정구 상마1길 20 범어사 선문화교육관', visit: '프로그램 일정 기준 · 사전 예약 · 봄·가을 추천',
+      images: {
+        hero: 'assets/images/report/beomeosa/hero.webp',
+        programs: ['assets/images/report/beomeosa/program-seon.webp', 'assets/images/report/beomeosa/program-rest.webp', 'assets/images/report/beomeosa/program-volunteer.webp']
+      },
       programs: [
-        ['천년고찰 둘러보기', '문화해설과 함께 범어사의 전각과 역사, 수행 공간에 담긴 이야기를 천천히 살펴봅니다.'],
-        ['참선과 명상', '고요한 산사에서 호흡에 집중하며 일상의 속도를 낮추고 마음을 정돈합니다.'],
-        ['스님과의 차담', '따뜻한 차 한 잔과 함께 수행과 삶에 관한 이야기를 편안하게 나누는 시간입니다.']
+        ['선명상 주말 체험형', '선명상과 숲길 포행, 사찰 안내, 공양을 통해 범어사의 수행 문화를 경험하는 1박 2일 프로그램입니다. 108배 서원주 만들기와 새벽예불, 스님과의 차담을 통해 자신의 마음을 차분히 돌아봅니다.'],
+        ['‘쉼’ 휴식형', '정해진 체험보다 금정산의 바람과 새소리를 느끼며 자유롭게 쉬는 데 초점을 둔 프로그램입니다. 복잡한 도시와 일상에서 잠시 벗어나 조용한 산사에서 온전히 자신만의 시간을 보낼 수 있습니다.'],
+        ['휴식형 자원봉사 프로그램', '휴식형 템플스테이 후 방사 정리, 세탁물 정돈, 잡초 뽑기 등의 울력에 참여하는 프로그램입니다. 산사에서 쉬는 경험과 공동체를 위한 작은 노동을 결합합니다.']
       ],
       reviews: [
-        ['새벽 산사의 고요함 속에서 오랜만에 온전히 나에게 집중할 수 있었어요.', '휴식형 참가자'],
-        ['예불과 차담이 낯설지만 따뜻했고, 금정산의 계절 풍경도 오래 기억에 남아요.', '봄 프로그램 참가자']
+        ['수행복으로 갈아입는 순간부터 평범한 숙박이 아닌, 일상을 내려놓는 시간처럼 느껴졌다.', '템플스테이 참가자'],
+        ['범종과 목탁 소리, 숲길 산책, 이른 새벽의 고요함이 마음을 차분하게 만드는 경험됐습니다.', '주말 체험형 참가자'],
+        ['108배와 명상은 몸이 힘들기도 했지만, 반복되는 동작 속에서 자신에게 집중하고 마음을 비울 수 있었다.', '선명상 참가자']
       ]
     },
     taejongdae: {
@@ -59,15 +64,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let opener = null;
 
   const setText = (selector, value) => { modal.querySelector(selector).textContent = value; };
-  const setActiveCategory = targetId => categoryButtons.forEach(button => button.classList.toggle('is-active', button.dataset.modalTarget === targetId));
+  const setActiveCategory = targetId => {
+    categoryButtons.forEach(button => button.classList.toggle('is-active', button.dataset.modalTarget === targetId));
+    modal.querySelectorAll('.modal-section').forEach(section => {
+      section.classList.toggle('is-active', section.id === targetId);
+    });
+    scrollArea.scrollTop = 0;
+  };
 
   const fillModal = (key) => {
     const data = resources[key];
     if (!data) return;
     modal.dataset.theme = key;
-    setText('[data-modal-number]', data.number);
     setText('[data-modal-title]', data.title);
     setText('[data-modal-type]', data.type);
+    setText('[data-modal-home-label]', data.type);
     setText('[data-modal-visual-label]', data.visual);
     setText('[data-modal-description]', data.description);
     setText('[data-modal-location]', data.location);
@@ -80,10 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const image = data.images?.programs?.[index];
       return `<article class="program-card"><figure class="${image ? 'has-photo' : ''}" ${image ? `style="background-image:url('${image}')"` : ''} aria-label="${program[0]} 이미지"><span class="sr-only">${image ? program[0] : '추후 실제 이미지로 교체'}</span></figure><h4>${String(index + 1).padStart(2, '0')}. ${program[0]}</h4><p>${program[1]}</p></article>`;
     }).join('');
-    modal.querySelector('[data-modal-reviews]').innerHTML = data.reviews.map((review, index) => {
-      const image = data.images?.reviews?.[index];
-      return `<article class="polaroid"><div class="polaroid-photo ${image ? 'has-photo' : ''}" ${image ? `style="background-image:url('${image}')"` : ''} role="img" aria-label="방문자 여행 사진 ${index + 1}"></div><p>${review[0]}</p><small>— ${review[1]}</small></article>`;
-    }).join('');
+    modal.querySelector('[data-modal-reviews]').innerHTML = data.reviews.map(review => `<article class="review-entry"><header><span aria-label="별점 5점">★★★★★</span><small>${review[1]}</small></header><p>${review[0]}</p></article>`).join('');
   };
 
   const openModal = row => {
@@ -124,19 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   modal.querySelectorAll('[data-modal-close]').forEach(button => button.addEventListener('click', closeModal));
   categoryButtons.forEach(button => button.addEventListener('click', () => {
-    const section = modal.querySelector(`#${button.dataset.modalTarget}`);
-    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setActiveCategory(button.dataset.modalTarget);
   }));
-
-  scrollArea.addEventListener('scroll', () => {
-    const top = scrollArea.getBoundingClientRect().top + 130;
-    let current = 'modal-home';
-    ['modal-home', 'modal-program', 'modal-review'].forEach(id => {
-      if (modal.querySelector(`#${id}`).getBoundingClientRect().top <= top) current = id;
-    });
-    setActiveCategory(current);
-  }, { passive: true });
 
   document.addEventListener('keydown', event => {
     if (modal.hidden) return;

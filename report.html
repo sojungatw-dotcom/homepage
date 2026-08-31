@@ -10,9 +10,9 @@
         <table class="resource-table">
           <thead><tr><th>NO.</th><th>선정 관광 자원</th><th>대표 유형</th><th>지역 · 대표 체험</th><th>추천 방문 시기</th></tr></thead>
           <tbody>
-            <tr class="resource-row" data-resource="oryukdo" tabindex="0" role="button" aria-haspopup="dialog" aria-label="오륙도 스카이 워크 상세 보기">
+            <tr class="resource-row" data-resource="oryukdo" tabindex="0" role="button" aria-haspopup="dialog" aria-label="오륙도 상세 보기">
               <td class="resource-number">01</td>
-              <td class="resource-main" data-label="선정 관광 자원"><p class="resource-kicker">COASTAL VIEWPOINT</p><h3>오륙도 스카이 워크</h3><p class="resource-intro">35m 해안 절벽 끝에서 투명 유리바닥을 통해 파도와 오륙도 해안을 내려다보는 무료 전망시설</p><span class="resource-action">DETAIL VIEW ↗</span></td>
+              <td class="resource-main" data-label="선정 관광 자원"><p class="resource-kicker">COASTAL LANDMARK</p><h3>오륙도</h3><p class="resource-intro">부산 남구 앞바다에 자리한 여섯 개의 바위섬으로, 바라보는 방향에 따라 다섯 개 또는 여섯 개로 보이는 부산의 대표 해안 명소</p><span class="resource-action">DETAIL VIEW ↗</span></td>
               <td class="resource-type" data-label="대표 유형"><span class="tag">자연 관광</span></td>
               <td class="resource-details" data-label="지역 · 대표 체험"><dl><div><dt>LOCATION</dt><dd>부산광역시 남구 오륙도로 137</dd></div><div><dt>EXPERIENCE</dt><dd>스카이 워크</dd></div></dl></td>
               <td class="resource-visit" data-label="추천 방문 시기"><strong>09:00—18:00</strong><span>17:50 입장 마감</span><em>맑은 날 추천</em></td>
@@ -36,37 +36,45 @@
       </div>
     </section>
     <section class="content-section container reveal"><div class="section-heading"><div><p class="section-index">02 / INSIGHT</p><h2>Planning notes</h2></div></div><div class="note-grid"><article><span>01</span><h3>관찰</h3><p>현장 조사에서 발견한 특징과 방문자 관점의 문제를 기록하는 공간입니다.</p></article><article><span>02</span><h3>인사이트</h3><p>조사 내용을 바탕으로 도출한 콘텐츠 키워드와 차별점을 정리합니다.</p></article><article><span>03</span><h3>활용</h3><p>SNS 채널과 형식에 맞는 실제 콘텐츠 아이디어를 구체화합니다.</p></article></div></section>
-  </main><footer class="site-footer"><div class="container footer-grid"><a class="footer-title" href="index.html">JOURNEY ARCHIVE</a><p>SK플래닛 관광 콘텐츠 제작 아카이브</p><p class="footer-meta">© <span data-current-year></span> YOUR NAME<br>ALL RIGHTS RESERVED.</p></div></footer>
+  </main><footer class="site-footer"><div class="container footer-grid"><a class="footer-title" href="index.html">JOURNEY ARCHIVE</a><p>SK플래닛 관광 콘텐츠 제작 아카이브</p><nav class="footer-social" aria-label="소셜 미디어"><a href="https://www.instagram.com/hello.iamove/" target="_blank" rel="noopener noreferrer" aria-label="인스타그램 새 창에서 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.25"></circle><circle class="social-dot" cx="17.4" cy="6.7" r="1"></circle></svg></a><a href="https://www.youtube.com/channel/UC8eGlGJe2-aL2vwoHGrQ_UA" target="_blank" rel="noopener noreferrer" aria-label="유튜브 새 창에서 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 7.2a2.8 2.8 0 0 0-2-2C17.2 4.7 12 4.7 12 4.7s-5.2 0-7 .5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.5 12 29 29 0 0 0 3 16.8a2.8 2.8 0 0 0 2 2c1.8.5 7 .5 7 .5s5.2 0 7-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .5-4.8 29 29 0 0 0-.5-4.8Z"></path><path class="social-play" d="m10 9 5 3-5 3Z"></path></svg></a></nav><p class="footer-meta">© <span data-current-year></span> YOUR NAME<br>ALL RIGHTS RESERVED.</p></div></footer>
 
   <div class="resource-modal" id="resource-modal" hidden>
     <button class="modal-backdrop" type="button" data-modal-close tabindex="-1" aria-label="팝업 닫기"></button>
     <article class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <button class="modal-close" type="button" data-modal-close aria-label="상세 팝업 닫기"><span></span><span></span></button>
       <aside class="modal-sidebar">
-        <p class="modal-sidebar-title">CATEGORY</p>
-        <nav class="modal-category" aria-label="상세 콘텐츠 카테고리">
-          <button class="is-active" type="button" data-modal-target="modal-home"><i aria-hidden="true"></i><span>홈</span></button>
-          <button type="button" data-modal-target="modal-program"><i aria-hidden="true"></i><span>체험 프로그램</span></button>
-          <button type="button" data-modal-target="modal-review"><i aria-hidden="true"></i><span>방문자 후기</span></button>
-        </nav>
-        <p class="modal-sidebar-note">BUSAN<br>TOURISM ARCHIVE</p>
+        <p class="modal-sidebar-title"><span>관</span> 관광 자원 조사표</p>
+        <figure class="modal-side-figure">
+          <div class="modal-side-image" data-modal-image="hero"><span data-modal-visual-label></span></div>
+          <figcaption>자원 전경사진</figcaption>
+        </figure>
+        <article class="modal-side-card">
+          <h2 id="modal-title" data-modal-title></h2>
+          <span class="modal-side-type" data-modal-type></span>
+          <dl><div><dt>위치</dt><dd data-modal-location></dd></div><div><dt>방문 시간</dt><dd data-modal-visit></dd></div></dl>
+        </article>
       </aside>
-      <div class="modal-content" data-modal-scroll>
-        <section class="modal-section modal-home" id="modal-home">
-          <header class="modal-heading"><p>SELECTED RESOURCE · <span data-modal-number></span></p><h2 id="modal-title" data-modal-title></h2><div class="modal-meta"><span data-modal-type></span><time datetime="2026-08-27">2026.08.27</time></div></header>
-          <div class="modal-hero-image" data-modal-image="hero"><span data-modal-visual-label></span></div>
-          <p class="modal-description" data-modal-description></p>
-          <div class="modal-tags" data-modal-tags></div>
-          <dl class="modal-info"><div><dt>LOCATION</dt><dd data-modal-location></dd></div><div><dt>VISIT</dt><dd data-modal-visit></dd></div></dl>
-        </section>
-        <section class="modal-section modal-program" id="modal-program">
-          <div class="modal-section-title"><p>02 / EXPERIENCE</p><h3>체험 프로그램</h3><span>이곳에서만 만날 수 있는 세 가지 장면</span></div>
-          <div class="program-grid" data-modal-programs></div>
-        </section>
-        <section class="modal-section modal-review" id="modal-review">
-          <div class="modal-section-title"><p>03 / VISITOR NOTE</p><h3>방문자 후기</h3><span>여행자가 남긴 작은 기록</span></div>
-          <div class="polaroid-grid" data-modal-reviews></div>
-        </section>
+      <div class="modal-panel">
+        <nav class="modal-category" aria-label="상세 콘텐츠 카테고리">
+          <button class="is-active" type="button" data-modal-target="modal-home"><span data-modal-home-label>자연 관광</span></button>
+          <button type="button" data-modal-target="modal-program"><span>체험 프로그램</span></button>
+          <button type="button" data-modal-target="modal-review"><span>방문자 후기</span></button>
+        </nav>
+        <div class="modal-content" data-modal-scroll>
+          <section class="modal-section modal-home is-active" id="modal-home">
+            <div class="modal-date"><span>조사 실시 연월일</span><strong>2026년 08월 27일</strong></div>
+            <div class="modal-overview"><span>자원적 특성 및 유래 개요</span><p class="modal-description" data-modal-description></p></div>
+            <div class="modal-tags" data-modal-tags></div>
+          </section>
+          <section class="modal-section modal-program" id="modal-program">
+            <div class="modal-section-title"><p>02 / EXPERIENCE</p><h3>체험 프로그램</h3><span>이곳에서만 만날 수 있는 세 가지 장면</span></div>
+            <div class="program-grid" data-modal-programs></div>
+          </section>
+          <section class="modal-section modal-review" id="modal-review">
+            <div class="modal-section-title"><p>03 / VISITOR NOTE</p><h3>방문자 후기</h3><span>여행자가 남긴 작은 기록</span></div>
+            <div class="review-list" data-modal-reviews></div>
+          </section>
+        </div>
       </div>
     </article>
   </div>
