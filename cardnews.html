@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="글을 붙여넣으면 바로 카드뉴스 덱으로 구성해주는 브라우저 스튜디오입니다.">
+  <title>Card Atelier — 카드뉴스 스튜디오</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/cardnews.css">
+  <script src="js/cardnews.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#editor-stage">에디터 바로가기</a>
+  <header class="app-header">
+    <a class="studio-brand" href="contents.html" aria-label="콘텐츠 아카이브로 돌아가기">
+      <span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span><b>CARD ATELIER</b><small>by Journey Archive</small></span>
+    </a>
+    <div class="header-center" aria-label="저장 상태"><span class="save-dot"></span><span id="saveStatus">모든 변경사항 저장됨</span></div>
+    <div class="header-actions">
+      <button class="icon-button" id="importButton" type="button" title="덱 불러오기" aria-label="덱 불러오기">↥</button>
+      <button class="icon-button" id="exportJsonButton" type="button" title="덱 저장" aria-label="덱 JSON 저장">↧</button>
+      <button class="button button-primary" id="openComposer" type="button"><span>✦</span> 글로 카드 만들기</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="filmstrip" aria-label="카드 목록">
+      <div class="panel-heading"><div><span>DECK</span><strong id="deckCount">6 CARDS</strong></div><button class="mini-button" id="addSlide" type="button" aria-label="카드 추가">＋</button></div>
+      <div class="slide-list" id="slideList"></div>
+      <p class="filmstrip-hint">카드를 선택해 내용을 편집하세요.</p>
+    </aside>
+
+    <section class="stage-panel" id="editor-stage" aria-label="카드 미리보기">
+      <div class="stage-toolbar">
+        <div class="view-tabs" role="tablist" aria-label="미리보기 모드"><button class="is-active" type="button" role="tab" aria-selected="true">PREVIEW</button><button type="button" role="tab" aria-selected="false" disabled>1080 × 1350</button></div>
+        <div class="slide-navigation"><button id="prevSlide" type="button" aria-label="이전 카드">←</button><span><b id="currentNumber">01</b> / <span id="totalNumber">06</span></span><button id="nextSlide" type="button" aria-label="다음 카드">→</button></div>
+      </div>
+      <div class="canvas-shell">
+        <div class="card-canvas" id="cardCanvas" aria-live="polite"></div>
+      </div>
+      <div class="stage-actions">
+        <span>4:5 INSTAGRAM PORTRAIT</span>
+        <div><button class="text-button" id="shuffleButton" type="button">⤨ 배경 셔플</button><button class="button button-dark" id="pngButton" type="button">↓ 현재 카드 PNG</button></div>
+      </div>
+    </section>
+
+    <aside class="inspector" aria-label="카드 편집 패널">
+      <div class="inspector-tabs" role="tablist"><button class="is-active" type="button" role="tab">내용</button><button type="button" role="tab" disabled>레이아웃</button></div>
+      <section class="control-section">
+        <div class="section-label"><span>CARD TYPE</span><b id="typeLabel">표지</b></div>
+        <select id="cardType" aria-label="카드 타입">
+          <option value="cover">표지</option><option value="content">본문</option><option value="quote">인용</option><option value="table">비교표</option><option value="closing">마무리 CTA</option>
+        </select>
+      </section>
+      <section class="control-section field-section"><div class="section-label"><span>CONTENT</span><small>*강조* · **굵게**</small></div><div id="fieldControls"></div></section>
+      <section class="control-section">
+        <div class="section-label"><span>STYLE IDENTITY</span><b id="presetName">시네마틱</b></div>
+        <div class="preset-grid" id="presetGrid"></div>
+      </section>
+      <section class="control-section">
+        <div class="section-label"><span>POINT COLOR</span><output id="accentValue">#7A9EFF</output></div>
+        <div class="color-row" id="colorRow"></div>
+      </section>
+      <section class="control-section">
+        <div class="section-label"><span>BACKGROUND</span><button class="link-button" id="clearBackground" type="button">초기화</button></div>
+        <label class="upload-zone" for="backgroundUpload"><span>＋</span><b>배경 이미지 업로드</b><small>JPG, PNG · 텍스트 없는 이미지 권장</small></label>
+        <input id="backgroundUpload" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+        <label class="range-label" for="scrimRange"><span>하단 어둡기</span><output id="scrimValue">82</output></label>
+        <input id="scrimRange" type="range" min="0" max="100" value="82">
+      </section>
+      <section class="inspector-footer"><button class="danger-button" id="deleteSlide" type="button">카드 삭제</button><span>자동 저장 ON</span></section>
+    </aside>
+  </main>
+
+  <dialog class="composer-dialog" id="composerDialog">
+    <form method="dialog" class="composer-card" id="composerForm">
+      <button class="dialog-close" value="cancel" aria-label="닫기">×</button>
+      <p class="dialog-eyebrow">TEXT TO CARDS</p>
+      <h1>긴 글을, 넘겨보고 싶은<br><em>카드뉴스로.</em></h1>
+      <p class="dialog-copy">기사·대본·메모를 붙여넣으세요. 핵심 흐름을 찾아 표지부터 마무리까지 한 번에 구성합니다.</p>
+      <label for="sourceText">원문</label>
+      <textarea id="sourceText" rows="10" placeholder="첫 줄에는 제목을 적어보세요.\n\n문단을 나누거나 1. 2. 형식으로 쓰면 카드가 더 정확하게 구성됩니다."></textarea>
+      <div class="composer-meta"><span><i></i> 브라우저 빠른 변환</span><output id="charCount">0자</output></div>
+      <div class="composer-actions"><button class="button button-ghost" value="cancel">취소</button><button class="button button-primary large" id="convertButton" value="default"><span>✦</span> 카드 덱 만들기</button></div>
+    </form>
+  </dialog>
+
+  <input id="importFile" type="file" accept="application/json" hidden>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
