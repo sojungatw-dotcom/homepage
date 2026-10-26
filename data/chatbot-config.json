@@ -1,6 +1,6 @@
 {
-  "supabaseUrl": "",
-  "publishableKey": "",
+  "supabaseUrl": "https://jgybpxbrlaeshgamdnga.supabase.co",
+  "publishableKey": "sb_publishable_kPSlBAM6JcNDxuCFYlgmKw_pFz-8Q8f",
   "rpc": "submit_chatbot_inquiry",
   "privacy": {
     "controller": "",
