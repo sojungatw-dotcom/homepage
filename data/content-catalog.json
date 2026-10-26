@@ -1,0 +1,85 @@
+{
+  "checked_on": "2026-10-26",
+  "date_basis": "사용자 제공 업로드 이력 우선. 첫 여행 영상은 공식 Instagram 공개 날짜. 국밥 영상의 Instagram 메타 날짜(10/20)와 사용자 기록(10/21)은 차이가 있어 사용자 기록을 유지.",
+  "items": [
+    {
+      "id": "biff",
+      "title": "부산국제영화제 카드뉴스",
+      "category": "card",
+      "date": "2026-10-16",
+      "status": "published",
+      "description": "부산국제영화제 이후에도 살펴볼 영화 세 편을 소개하는 카드뉴스.",
+      "instagram": "https://www.instagram.com/p/DejRQ7nk0pO/",
+      "youtube": null,
+      "thumbnail": null
+    },
+    {
+      "id": "beomeosa",
+      "title": "범어사 템플스테이 카드뉴스",
+      "category": "card",
+      "date": "2026-10-19",
+      "status": "published",
+      "description": "부산에서 조용히 쉬어 갈 곳을 찾는 사람을 위한 범어사 템플스테이 소개.",
+      "instagram": "https://www.instagram.com/p/DerAbx0E4fn/",
+      "youtube": null,
+      "thumbnail": null
+    },
+    {
+      "id": "gukbap",
+      "title": "오브·모아 국밥 브이로그",
+      "category": "video",
+      "date": "2026-10-21",
+      "status": "published",
+      "description": "부산역에서 시작해 맛있는 한 끼로 이어지는 오브와 모아의 부산 브이로그.",
+      "instagram": "https://www.instagram.com/reel/DewJNnNv8lU/",
+      "youtube": "https://www.youtube.com/shorts/B7YWMI3ihAw",
+      "thumbnail": "https://i.ytimg.com/vi/B7YWMI3ihAw/oar1.jpg?sqp=-oaymwErCJYDEOEESFqQAgHyq4qpAxoIARUAAIhCyAEB2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDyZipdrUGe-RrYbhilcNE4XMsVow"
+    },
+    {
+      "id": "reels",
+      "title": "오브 릴스 · UPSIDE DOWN 챌린지",
+      "category": "video",
+      "date": "2026-10-23",
+      "status": "published",
+      "description": "오브의 일상을 가볍게 담은 9초 댄스 챌린지 영상.",
+      "instagram": "https://www.instagram.com/reel/De1SwzRvvzn/",
+      "youtube": "https://www.youtube.com/shorts/GEd7CN9ueKs",
+      "thumbnail": "https://i.ytimg.com/vi/GEd7CN9ueKs/oar3.jpg?sqp=-oaymwEoCNAFENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLApscP06bQ_fSm0UcQYaMafWrGM7g"
+    },
+    {
+      "id": "place-names",
+      "title": "부산 지명 이야기 카드뉴스",
+      "category": "card",
+      "date": null,
+      "status": "planning",
+      "description": "부산 지명에 담긴 이야기를 전할 자료를 조사하고 있습니다.",
+      "instagram": null,
+      "youtube": null,
+      "thumbnail": null,
+      "stage": "기획·자료 조사"
+    },
+    {
+      "id": "film-poster",
+      "title": "부산 영화 포스터 만들기 카드뉴스",
+      "category": "card",
+      "date": null,
+      "status": "planning",
+      "description": "부산을 영화 포스터로 표현하는 주제를 확정했습니다. 구성과 제작은 준비 중입니다.",
+      "instagram": null,
+      "youtube": null,
+      "thumbnail": null,
+      "stage": "주제 확정"
+    },
+    {
+      "id": "first-trip",
+      "title": "오브와 모아의 부산 여행 시작!",
+      "category": "video",
+      "date": "2026-10-13",
+      "status": "published",
+      "description": "오브와 모아가 함께 등장하는 부산 여행의 첫 인사 영상.",
+      "instagram": "https://www.instagram.com/reel/DedJPlkNl63/",
+      "youtube": "https://www.youtube.com/shorts/I5iZ5dfS7Ww",
+      "thumbnail": "https://i.ytimg.com/vi/I5iZ5dfS7Ww/oar2.jpg?sqp=-oaymwErCJUDEOAESFqQAgHyq4qpAxoIARUAAIhCyAEB2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDGn6Exn-ruFzYha1l0KFnjNj27Pg"
+    }
+  ]
+}

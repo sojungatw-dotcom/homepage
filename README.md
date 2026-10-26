@@ -13,7 +13,7 @@ SK플래닛 관광 콘텐츠 제작 활동의 조사, 콘텐츠, SNS 데이터, 
 
 ## 콘텐츠 교체
 
-1. `YOUR NAME`, 소개 문구, 연도 등을 실제 정보로 변경합니다.
+1. 공개 운영자명은 확인된 이름만 사용합니다. 현재 푸터에는 개인 이름 대신 OVE 아카이브 명칭을 표시합니다.
 2. 이미지 파일은 `assets/images/` 하위의 페이지별 폴더에 저장합니다.
 3. CSS 플레이스홀더를 이미지로 교체할 때 해당 요소에 `background-image: url(...)`, `background-size: cover`, `background-position: center`를 적용합니다.
 4. SNS의 숫자는 `sns.html` 내 `data-count` 값을 수정하면 자동으로 애니메이션됩니다.
