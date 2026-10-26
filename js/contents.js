@@ -34,32 +34,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const note=document.querySelector('#media-status');note.hidden=false;note.textContent='영상 재생을 완료하지 못했습니다. 카드 아래의 최종 영상 파일 링크로 다시 열어 주세요.';
     });
   });
-  const viewer=document.querySelector('#content-viewer');
-  if(!viewer)return;
-  const image=viewer.querySelector('#content-viewer-image');
-  const previous=viewer.querySelector('[data-viewer-prev]'),next=viewer.querySelector('[data-viewer-next]');
-  let slides=[],position=0,opener=null,catalog=null;
-  const relativeAsset=src=>typeof src==='string'&&/^assets\/images\/contents\/[a-z0-9_./-]+\.(jpg|jpeg|png|webp)$/i.test(src)&&!src.includes('..');
-  const showSlide=()=>{
-    const slide=slides[position];image.src=slide.src;image.alt=slide.alt;
-    viewer.querySelector('#content-viewer-page').textContent=(position+1)+' / '+slides.length;
-    previous.disabled=position===0;next.disabled=position===slides.length-1;
+  let catalogPromise=null;
+  const getCatalog=()=>{
+    if(!catalogPromise)catalogPromise=fetch('data/content-catalog.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('catalog');return response.json();}).catch(error=>{catalogPromise=null;throw error;});
+    return catalogPromise;
   };
-  const move=delta=>{const target=position+delta;if(target<0||target>=slides.length)return;position=target;showSlide();};
-  document.querySelectorAll('[data-gallery]').forEach(trigger=>trigger.addEventListener('click',async()=>{
-    if(trigger.disabled)return;trigger.disabled=true;
-    const status=document.querySelector('#media-status');
-    try{
-      if(!catalog){const response=await fetch('data/content-catalog.json',{cache:'no-store'});if(!response.ok)throw new Error('catalog');catalog=await response.json();}
-      const item=catalog.items.find(item=>item.id===trigger.dataset.gallery);
-      if(!item||!Array.isArray(item.slides)||!item.slides.length||item.slides.some(slide=>!relativeAsset(slide.src)||typeof slide.alt!=='string'))throw new Error('slides');
-      slides=item.slides;position=0;opener=trigger;viewer.querySelector('#content-viewer-title').textContent=item.title;showSlide();status.hidden=true;viewer.showModal();
-    }catch{status.hidden=false;status.textContent='카드뉴스를 불러오지 못했습니다. 다시 누르거나 기존 Instagram 게시물 링크를 이용해 주세요.';}
-    finally{trigger.disabled=false;}
-  }));
-  previous.addEventListener('click',()=>move(-1));next.addEventListener('click',()=>move(1));
-  viewer.querySelector('[data-viewer-close]').addEventListener('click',()=>viewer.close());
-  viewer.addEventListener('click',event=>{if(event.target===viewer)viewer.close();});
-  viewer.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();move(event.key==='ArrowLeft'?-1:1);}});
-  viewer.addEventListener('close',()=>{image.removeAttribute('src');opener?.focus();});
+  const relativeAsset=src=>typeof src==='string'&&/^assets\/images\/contents\/[a-z0-9_./-]+\.(jpg|jpeg|png|webp)$/i.test(src)&&!src.includes('..');
+  document.querySelectorAll('[data-carousel]').forEach(carousel=>{
+    const image=carousel.querySelector('img'),previous=carousel.querySelector('[data-carousel-prev]'),next=carousel.querySelector('[data-carousel-next]');
+    let slides=[],position=0,busy=false;
+    const move=async delta=>{
+      if(busy)return;busy=true;previous.disabled=true;next.disabled=true;
+      const note=document.querySelector('#media-status');
+      try{
+        if(!slides.length){
+          const catalog=await getCatalog(),item=catalog.items.find(item=>item.id===carousel.dataset.carousel);
+          if(!item||!Array.isArray(item.slides)||!item.slides.length||item.slides.some(slide=>!relativeAsset(slide.src)||typeof slide.alt!=='string'))throw new Error('slides');
+          slides=item.slides;
+        }
+        const target=position+delta;
+        if(target>=0&&target<slides.length){position=target;image.src=slides[position].src;image.alt=slides[position].alt;}
+        carousel.querySelector('[data-carousel-page]').textContent=(position+1)+' / '+slides.length;
+        note.hidden=true;
+      }catch{note.hidden=false;note.textContent='카드뉴스를 불러오지 못했습니다. 화살표를 다시 누르거나 기존 Instagram 게시물 링크를 이용해 주세요.';}
+      finally{busy=false;previous.disabled=position===0;next.disabled=slides.length>0&&position===slides.length-1;}
+    };
+    previous.addEventListener('click',()=>move(-1));next.addEventListener('click',()=>move(1));
+    carousel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();move(event.key==='ArrowLeft'?-1:1);}});
+  });
 });
