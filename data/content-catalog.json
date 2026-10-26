@@ -12,8 +12,34 @@
       "instagram": "https://www.instagram.com/p/DejRQ7nk0pO/",
       "youtube": null,
       "thumbnail": "assets/images/contents/biff-cover.jpg",
-      "thumbnail_source": "https://www.instagram.com/p/DejRQ7nk0pO/",
-      "thumbnail_kind": "official-cover"
+      "thumbnail_source": "사용자 제공 최종 카드뉴스",
+      "thumbnail_kind": "provided-final",
+      "slides": [
+        {
+          "src": "assets/images/contents/biff-cover.jpg",
+          "alt": "부산국제영화제 카드뉴스 1장 · 표지"
+        },
+        {
+          "src": "assets/images/contents/biff/02.jpg",
+          "alt": "부산국제영화제 카드뉴스 2장 · 최종면접"
+        },
+        {
+          "src": "assets/images/contents/biff/03.jpg",
+          "alt": "부산국제영화제 카드뉴스 3장 · 룩백"
+        },
+        {
+          "src": "assets/images/contents/biff/04.jpg",
+          "alt": "부산국제영화제 카드뉴스 4장 · 가능한 사랑"
+        },
+        {
+          "src": "assets/images/contents/biff/05.jpg",
+          "alt": "부산국제영화제 카드뉴스 5장 · 관람 정보"
+        },
+        {
+          "src": "assets/images/contents/biff/06.jpg",
+          "alt": "부산국제영화제 카드뉴스 6장 · CTA"
+        }
+      ]
     },
     {
       "id": "beomeosa",
@@ -25,8 +51,42 @@
       "instagram": "https://www.instagram.com/p/DerAbx0E4fn/",
       "youtube": null,
       "thumbnail": "assets/images/contents/beomeosa-cover.jpg",
-      "thumbnail_source": "https://www.instagram.com/p/DerAbx0E4fn/",
-      "thumbnail_kind": "official-cover"
+      "thumbnail_source": "사용자 제공 최종 카드뉴스",
+      "thumbnail_kind": "provided-final",
+      "slides": [
+        {
+          "src": "assets/images/contents/beomeosa-cover.jpg",
+          "alt": "범어사 템플스테이 카드뉴스 1장 · 표지"
+        },
+        {
+          "src": "assets/images/contents/beomeosa/02.jpg",
+          "alt": "범어사 템플스테이 카드뉴스 2장 · 숲길 걷기"
+        },
+        {
+          "src": "assets/images/contents/beomeosa/03.jpg",
+          "alt": "범어사 템플스테이 카드뉴스 3장 · 새벽예불"
+        },
+        {
+          "src": "assets/images/contents/beomeosa/04.jpg",
+          "alt": "범어사 템플스테이 카드뉴스 4장 · 선명상"
+        },
+        {
+          "src": "assets/images/contents/beomeosa/05.jpg",
+          "alt": "범어사 템플스테이 카드뉴스 5장 · 염주 만들기"
+        },
+        {
+          "src": "assets/images/contents/beomeosa/06.jpg",
+          "alt": "범어사 템플스테이 카드뉴스 6장 · 스님과 차담"
+        },
+        {
+          "src": "assets/images/contents/beomeosa/07.jpg",
+          "alt": "범어사 템플스테이 카드뉴스 7장 · 신청 전 안내"
+        },
+        {
+          "src": "assets/images/contents/beomeosa/08.jpg",
+          "alt": "범어사 템플스테이 카드뉴스 8장 · CTA"
+        }
+      ]
     },
     {
       "id": "gukbap",
@@ -37,7 +97,10 @@
       "description": "부산역에서 시작해 맛있는 한 끼로 이어지는 오브와 모아의 부산 브이로그.",
       "instagram": "https://www.instagram.com/reel/DewJNnNv8lU/",
       "youtube": "https://www.youtube.com/shorts/B7YWMI3ihAw",
-      "thumbnail": "https://i.ytimg.com/vi/B7YWMI3ihAw/oar1.jpg?sqp=-oaymwErCJYDEOEESFqQAgHyq4qpAxoIARUAAIhCyAEB2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDyZipdrUGe-RrYbhilcNE4XMsVow"
+      "thumbnail": "assets/images/contents/ove-gukbap-final-poster.jpg",
+      "video": "assets/videos/ove-gukbap-final.mp4",
+      "duration": 27.2,
+      "media_source": "사용자 제공 최종 영상의 웹용 사본"
     },
     {
       "id": "reels",
@@ -48,7 +111,10 @@
       "description": "오브의 일상을 가볍게 담은 9초 댄스 챌린지 영상.",
       "instagram": "https://www.instagram.com/reel/De1SwzRvvzn/",
       "youtube": "https://www.youtube.com/shorts/GEd7CN9ueKs",
-      "thumbnail": "https://i.ytimg.com/vi/GEd7CN9ueKs/oar3.jpg?sqp=-oaymwEoCNAFENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLApscP06bQ_fSm0UcQYaMafWrGM7g"
+      "thumbnail": "assets/images/contents/ove-upside-down-final-poster.jpg",
+      "video": "assets/videos/ove-upside-down-final.mp4",
+      "duration": 9,
+      "media_source": "사용자 제공 최종 영상의 웹용 사본"
     },
     {
       "id": "place-names",
