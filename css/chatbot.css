@@ -50,3 +50,12 @@ body.menu-open .ove-chat-widget { visibility:hidden; }
  .ove-chat-composer input, .ove-chat-field input, .ove-chat-field textarea { font-size:16px; }
  .ove-chat-header { padding:14px; }
 }
+
+.ove-chat-cards{display:grid;gap:12px;margin-top:12px}
+.ove-chat-content-card{background:#fff;border:1px solid #d9e1ec;border-radius:12px;overflow:hidden;padding-bottom:12px}
+.ove-chat-content-card>a:first-child{display:block;color:#17253e;text-decoration:none}
+.ove-chat-content-card img{display:block;width:100%;height:180px;object-fit:contain;background:#e5edf9}
+.ove-chat-content-card strong{display:block;padding:12px 12px 4px;font-size:14px}
+.ove-chat-content-card small{display:block;padding:0 12px;color:#245ac4;font-size:10px}
+.ove-chat-message .ove-chat-card-summary{border:0;background:none;padding:8px 12px;font-size:12px;white-space:normal}
+.ove-chat-card-link{display:inline-block;margin:0 12px;font-size:12px;color:#245ac4;text-underline-offset:3px}

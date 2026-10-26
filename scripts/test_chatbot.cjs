@@ -6,6 +6,7 @@ const assert = require('node:assert/strict');
 const schema = require('../js/chatbot-schema.js');
 const root = path.resolve(__dirname, '..');
 const data = JSON.parse(fs.readFileSync(path.join(root, 'data/chatbot.json')));
+const catalog = JSON.parse(fs.readFileSync(path.join(root, 'data/content-catalog.json')));
 const source = fs.readFileSync(path.join(root, 'js/chatbot.js'), 'utf8');
 class Element {
   constructor(tag) { this.tag = tag; this.children = []; this.attrs = {}; this.dataset = {}; this.listeners = {}; this.value = ''; this.checked = false; }
@@ -32,6 +33,7 @@ async function boot(config = {}, restored = null, published = null) {
   const context = {document, OveChatSchema:schema, URL, AbortController, crypto: require('node:crypto').webcrypto, setTimeout, clearTimeout,
     requestAnimationFrame: fn => fn(), sessionStorage: {getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k)},
     fetch: async (url, options) => {
+      if (String(url).endsWith('/data/content-catalog.json')) return {ok:true,json:async()=>catalog};
       if (String(url).endsWith('/data/chatbot.json')) return {ok: true, json: async () => data};
       if (String(url).endsWith('/data/chatbot-config.json')) return {ok: true, json: async () => config};
       if (String(url).endsWith('/get_published_chatbot')) return {ok:true, json:async()=>published};
@@ -51,6 +53,14 @@ async function boot(config = {}, restored = null, published = null) {
     if (option.next) assert(data.nodes[option.next], option.next);
     if (option.href && !option.href.startsWith('https://')) assert(fs.existsSync(path.join(root, option.href.split('?')[0])), option.href);
   }
+  const visual = await boot();
+  const visualInput = visual.find('ove-chat-composer').children[0];
+  visualInput.value='카드뉴스'; await visual.find('ove-chat-composer').fire('submit');
+  assert.equal(visual.state().current,'cards');
+  const previewCards=visual.all().filter(e=>e.className==='ove-chat-content-card');
+  assert.equal(previewCards.length,catalog.items.filter(i=>i.category==='card'&&i.status==='published').length);
+  assert(previewCards.every(e=>e.all().some(c=>c.tag==='a'&&c.href.includes('contents.html#'))));
+  assert(!previewCards.some(e=>e.all().some(c=>c.textContent==='부산 지명 이야기 카드뉴스')));
   const a = await boot();
   await a.click(data.ui.launcher); await a.click('포트폴리오 보기'); await a.click('성과·배운 점');
   assert.equal(a.state().current, 'results');

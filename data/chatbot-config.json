@@ -8,5 +8,7 @@
     "retention": "문의 접수일로부터 2년"
   },
   "consentVersion": "2026-10-26-v1",
-  "adminEmail": "admin@admin.com"
+  "adminEmail": "admin@admin.com",
+  "reviewsEnabled": true,
+  "reviewDeletionEnabled": false
 }

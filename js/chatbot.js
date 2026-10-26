@@ -7,7 +7,7 @@
   const previewMode = globalThis.oveChatbotPreview === true;
   const schema = globalThis.OveChatSchema;
   const validDocument = candidate => !!candidate?.ui && !!candidate?.nodes?.home && !!candidate?.nodes?.fallback && (!schema || schema.validate(candidate).length === 0);
-  let data, config = {}, state, panel, launcher, log, choices, inquiryHost, question, status;
+  let data, catalog = [], config = {}, state, panel, launcher, log, choices, inquiryHost, question, status;
   let pending = false, requestId = null, requestBody = null, requestController = null, formGeneration = 0;
   let storageAvailable = true;
   const el = (tag, className, text) => {
@@ -62,15 +62,44 @@
       return (url.origin === root.origin && ['http:', 'https:'].includes(url.protocol)) || url.protocol === 'https:' ? url : null;
     } catch { return null; }
   }
+  async function loadCatalog() {
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),5000);
+    try {
+      const response=await fetch(new URL('data/content-catalog.json',root),{cache:'no-store',signal:controller.signal});
+      const value=response.ok?await response.json():null;
+      catalog=Array.isArray(value?.items)?value.items.filter(item=>item&&/^[a-z][a-z0-9-]*$/.test(item.id)&&typeof item.title==='string'&&typeof item.description==='string'&&['card','video'].includes(item.category)&&['published','production','planning'].includes(item.status)):[];
+    } catch { catalog=[]; } finally { clearTimeout(timer); }
+  }
+  function contentCards(nodeId) {
+    const category={cards:'card',videos:'video',works:'all'}[nodeId];
+    if(!category)return null;
+    const items=catalog.filter(item=>(category==='all'||item.category===category)&&item.status==='published');
+    if(!items.length)return null;
+    const cards=el('div','ove-chat-cards');cards.setAttribute('aria-label',category==='card'?'카드뉴스 미리보기':'공개 콘텐츠 미리보기');
+    items.forEach(item=>{
+      const card=el('article','ove-chat-content-card');
+      const href=safeLink('contents.html#'+item.id);
+      const link=el('a');link.href=href.href;link.target='_blank';link.rel='noopener noreferrer';
+      if(item.thumbnail&&safeLink(item.thumbnail)){
+        const image=el('img');image.src=safeLink(item.thumbnail).href;image.alt=item.title+' 표지';image.loading='lazy';
+        image.addEventListener('error',()=>{image.hidden=true;});link.append(image);
+      }
+      link.append(el('strong','',item.title));
+      card.append(link,el('small','',item.category==='card'?'CARD NEWS · 업로드 완료':'VIDEO · 업로드 완료'),el('p','ove-chat-card-summary',item.description));
+      const detail=el('a','ove-chat-card-link','콘텐츠 보기 ↗');detail.href=href.href;detail.target='_blank';detail.rel='noopener noreferrer';card.append(detail);cards.append(card);
+    });
+    return cards;
+  }
   function renderLog() {
     log.replaceChildren();
     state.messages.forEach(message => {
       const text = message.node ? data.nodes[message.node].answer : message.text;
       const item = el('div', `ove-chat-message ${message.node ? 'ove-chat-bot' : 'ove-chat-user'}`);
       item.append(el('span', 'ove-chat-speaker', message.node ? 'OVE' : '나'), el('p', '', text));
+      if(message.node){const cards=contentCards(message.node);if(cards)item.append(cards);}
       log.append(item);
     });
-    requestAnimationFrame(() => { log.scrollTop = log.scrollHeight; });
+    requestAnimationFrame(() => { const last=log.children[log.children.length-1]; log.scrollTop=['cards','videos','works'].includes(state.current)&&last?last.offsetTop-log.offsetTop:log.scrollHeight; });
   }
   function cancelForm() {
     formGeneration++;
@@ -263,6 +292,7 @@
     if (!storageAvailable) status.textContent = data.ui.storageWarning;
   }
   async function load() {
+    await loadCatalog();
     if (previewMode) {
       data = await globalThis.oveChatbotPreviewReady;
       if (!validDocument(data)) throw new Error('invalid_preview');

@@ -4,7 +4,7 @@
   const schema = window.OveChatSchema;
   let config, token=null, sessionId=0, expiryTimer, serverState, doc, savedText=null, reviewedText=null;
   let currentNode='home', rawDirty=false, buttonsTextValid=true, busy=false, previewCounter=0, previewPending=null;
-  let versionCursor=null, inquiryPage=0, inquiryHasNext=false;
+  let versionCursor=null, inquiryPage=0, inquiryHasNext=false, reviewPage=0, reviewHasNext=false;
   const stringify = o => JSON.stringify(o,null,2);
   const canonical = o => JSON.stringify(o);
   const clone = o => JSON.parse(JSON.stringify(o));
@@ -28,6 +28,8 @@
     $('#more-versions').disabled=busy;
     $('#prev-inquiries').disabled=busy || inquiryPage===0;
     $('#next-inquiries').disabled=busy || !inquiryHasNext;
+    $('#prev-reviews').disabled=busy || reviewPage===0;
+    $('#next-reviews').disabled=busy || !reviewHasNext;
     $('#draft-label').textContent=`초안 r${serverState.revision}${dirty()?' · 저장하지 않은 변경':' · 저장됨'}`;
     $('#publish-help').textContent=reviewedText===canonical(doc)&&!dirty()?'미리보기 확인 완료 · 최종 게시 버튼을 누르면 공개됩니다.':'초안 저장 → 미리보기 → 최종 게시 순서로 진행하세요.';
   }
@@ -38,6 +40,7 @@
     sessionId++;token=null;clearTimeout(expiryTimer);previewPending?.reject(new Error('로그인이 종료됐습니다.'));previewPending=null;
     doc=null;serverState=null;savedText=null;reviewedText=null;rawDirty=false;buttonsTextValid=true;
     $('#admin-panel').hidden=true;$('#login-panel').hidden=false;$('#logout').hidden=true;
+    $('#review-list').replaceChildren();
     $('#node-list').replaceChildren();$('#common-fields').replaceChildren();$('#node-select').replaceChildren();$('#version-list').replaceChildren();$('#inquiry-list').replaceChildren();$('#validation-errors').replaceChildren();$('#validation-errors').hidden=true;
     for(const id of ['raw-json','node-answer','node-buttons','node-questions','node-keywords','publish-note'])$('#'+id).value='';
     $('#preview-frame').src='about:blank';$('#preview-section').hidden=true;$('#publish-dialog').close();
@@ -136,11 +139,48 @@
     }
     $('#inquiry-page').textContent=String(inquiryPage+1)+'페이지';updateButtons();
   }
-  function activateTab(id){
-    for(const tab of ['editor','versions','inquiries']){const active=tab===id;$('#tab-'+tab).setAttribute('aria-selected',String(active));$('#tab-'+tab).tabIndex=active?0:-1;$('#'+tab+'-tab').hidden=!active;}
+  async function loadReviews(){
+    if(!config.reviewsEnabled){$('#review-list').replaceChildren(elem('p','후기 저장 서버 연결을 준비 중입니다.'));return;}
+    const deletionReady=config.reviewDeletionEnabled===true;
+    $('#review-filter').querySelector('option[value=deleted]').disabled=!deletionReady;
+    let filter=$('#review-filter').value;
+    if(filter==='deleted'&&!deletionReady){filter='pending';$('#review-filter').value=filter;}
+    const deletionFilter=deletionReady?(filter==='deleted'?'&deleted_at=not.is.null':'&deleted_at=is.null'):'';
+    const statusFilter=['all','deleted'].includes(filter)?'':'&status=eq.'+encodeURIComponent(filter);
+    const rows=await request('/rest/v1/visitor_reviews?select=request_id,resource,nickname,message,status,created_at'+(deletionReady?',deleted_at':'')+'&order=created_at.desc,request_id.desc&limit=21&offset='+reviewPage*20+statusFilter+deletionFilter,{method:'GET'});
+    reviewHasNext=rows.length>20;$('#review-list').replaceChildren();
+    if(!rows.length)$('#review-list').append(elem('p','이 조건으로 접수된 후기가 없습니다.'));
+    const names={oryukdo:'오륙도',beomeosa:'범어사',taejongdae:'태종대'};
+    for(const review of rows.slice(0,20)){
+      const card=elem('article',undefined,'inquiry-card'),head=elem('header');head.append(elem('h3',(names[review.resource]||review.resource)+' · '+review.nickname),elem('small',stamp(review.created_at)));card.append(head,elem('p',review.message));
+      if(review.deleted_at){
+        card.append(elem('small','삭제됨 · '+stamp(review.deleted_at)),action('후기 복구',async()=>{
+          await rpc('set_visitor_review_deleted',{p_request_id:review.request_id,p_deleted:false});status('후기를 확인 대기로 복구했습니다. 다시 승인해야 공개됩니다.');await loadReviews();
+        }));$('#review-list').append(card);continue;
+      }
+      const label=elem('label','공개 상태'),select=elem('select');select.setAttribute('aria-label','후기 공개 상태');
+      for(const [value,text] of [['pending','확인 대기'],['published','공개'],['hidden','비공개']]){const o=elem('option',text);o.value=value;select.append(o);}select.value=review.status;label.append(select);card.append(label,action('공개 상태 저장',async()=>{
+        const updated=await request('/rest/v1/visitor_reviews?request_id=eq.'+encodeURIComponent(review.request_id),{method:'PATCH',headers:{Prefer:'return=representation'},body:{status:select.value}});
+        if(updated.length!==1)throw new Error('후기 상태를 저장하지 못했습니다.');status('후기 공개 상태를 저장했습니다.');await loadReviews();
+      }));
+      if(deletionReady)card.append(action('후기 삭제',async()=>{
+        if(!confirm('이 후기를 삭제할까요? 공개 목록에서 제외되며 삭제됨 목록에서 복구할 수 있습니다.'))return;
+        await rpc('set_visitor_review_deleted',{p_request_id:review.request_id,p_deleted:true});status('후기를 삭제했습니다. 원문은 보존되며 삭제됨 목록에서 복구할 수 있습니다.');await loadReviews();
+      }));
+      else card.append(elem('small','삭제 기능은 서버 설정 적용 후 활성화됩니다.'));
+      $('#review-list').append(card);
+    }
+    $('#review-page').textContent=(reviewPage+1)+'페이지';updateButtons();
   }
-  for(const name of ['editor','versions','inquiries'])$('#tab-'+name).addEventListener('click',()=>run(async()=>{activateTab(name);if(name==='versions')await loadVersions();if(name==='inquiries')await loadInquiries();}));
-  document.querySelector('[role=tablist]').addEventListener('keydown',event=>{const tabs=[...document.querySelectorAll('[role=tab]')];const i=tabs.indexOf(document.activeElement);if(i<0||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const n=event.key==='Home'?0:event.key==='End'?2:(i+(event.key==='ArrowRight'?1:2))%3;tabs[n].click();tabs[n].focus();});
+  function activateTab(id){
+    for(const tab of ['editor','versions','inquiries','reviews']){const active=tab===id;$('#tab-'+tab).setAttribute('aria-selected',String(active));$('#tab-'+tab).tabIndex=active?0:-1;$('#'+tab+'-tab').hidden=!active;}
+  }
+  for(const name of ['editor','versions','inquiries','reviews'])$('#tab-'+name).addEventListener('click',()=>run(async()=>{activateTab(name);if(name==='versions')await loadVersions();if(name==='inquiries')await loadInquiries();if(name==='reviews')await loadReviews();}));
+  document.querySelector('[role=tablist]').addEventListener('keydown',event=>{const tabs=[...document.querySelectorAll('[role=tab]')];const i=tabs.indexOf(document.activeElement);if(i<0||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const n=event.key==='Home'?0:event.key==='End'?tabs.length-1:(i+(event.key==='ArrowRight'?1:tabs.length-1))%tabs.length;tabs[n].click();tabs[n].focus();});
+  $('#refresh-reviews').addEventListener('click',()=>run(loadReviews));
+  $('#review-filter').addEventListener('change',()=>run(async()=>{reviewPage=0;await loadReviews();}));
+  $('#prev-reviews').addEventListener('click',()=>run(async()=>{if(reviewPage>0)reviewPage--;await loadReviews();}));
+  $('#next-reviews').addEventListener('click',()=>run(async()=>{if(reviewHasNext)reviewPage++;await loadReviews();}));
   $('#node-select').addEventListener('change',event=>selectNode(event.target.value));
   for(const [id,field] of [['node-answer','answer'],['node-questions','questions'],['node-keywords','keywords']])$('#'+id).addEventListener('input',event=>{doc.nodes[currentNode][field]=field==='answer'?event.target.value:event.target.value.split('\n').map(s=>s.trim()).filter(Boolean);changed();});
   $('#node-buttons').addEventListener('input',event=>{try{const value=JSON.parse(event.target.value);if(!Array.isArray(value))throw new Error();doc.nodes[currentNode].buttons=value;buttonsTextValid=true;changed();}catch{buttonsTextValid=false;reviewedText=null;updateButtons();}});

@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = resources[key];
     if (!data) return;
     modal.dataset.theme = key;
+    document.dispatchEvent(new CustomEvent('ove-resource-open', {detail:{resource:key,title:data.title}}));
     setText('[data-modal-title]', data.title);
     setText('[data-modal-type]', data.type);
     setText('[data-modal-home-label]', data.type);
@@ -155,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal.hidden) return;
     if (event.key === 'Escape') closeModal();
     if (event.key === 'Tab') {
-      const focusable = [...modal.querySelectorAll('.modal-dialog button:not([tabindex="-1"])')];
+      const focusable = [...modal.querySelectorAll('.modal-dialog button, .modal-dialog a[href], .modal-dialog input, .modal-dialog textarea, .modal-dialog select, .modal-dialog [tabindex="0"]')].filter(el => !el.disabled && el.getClientRects().length);
       const first = focusable[0], last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }

@@ -9,10 +9,11 @@
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/reset.css?v=20261015-ove3">
-  <link rel="stylesheet" href="css/fonts.css?v=20261015-ove3"><link rel="stylesheet" href="css/common.css?v=20261015-ove3"><link rel="stylesheet" href="css/layout.css?v=20261015-ove3"><link rel="stylesheet" href="css/pages.css?v=20261015-ove3"><link rel="stylesheet" href="css/report-modal.css?v=20261015-ove3"><link rel="stylesheet" href="css/section-spacing.css?v=20261015-ove3"><script src="js/common.js" defer></script>  <link rel="stylesheet" href="css/chatbot.css?v=20261026">
+  <link rel="stylesheet" href="css/fonts.css?v=20261015-ove3"><link rel="stylesheet" href="css/common.css?v=20261015-ove3"><link rel="stylesheet" href="css/layout.css?v=20261015-ove3"><link rel="stylesheet" href="css/pages.css?v=20261015-ove3"><link rel="stylesheet" href="css/report-modal.css?v=20261026-scroll1"><link rel="stylesheet" href="css/section-spacing.css?v=20261015-ove3"><script src="js/common.js" defer></script>  <link rel="stylesheet" href="css/chatbot.css?v=20261026-cards1">
+  <script src="js/visitor-reviews.js?v=20261026-reviews1" defer></script>
   <script src="js/chatbot-schema.js?v=20261026-admin1" defer></script>
-  <script src="js/chatbot.js?v=20261026-admin1" defer></script>
-  <link rel="stylesheet" href="css/content-update.css?v=20261026-content">
+  <script src="js/chatbot.js?v=20261026-cards1" defer></script>
+  <link rel="stylesheet" href="css/content-update.css?v=20261026-covers1">
 </head>
 <body data-page="report"><a class="skip-link" href="#main">본문 바로가기</a>
   <header class="site-header">
@@ -80,7 +81,7 @@
           <button type="button" data-modal-target="modal-program"><span>체험 프로그램</span></button>
           <button type="button" data-modal-target="modal-review"><span>방문자 후기</span></button>
         </nav>
-        <div class="modal-content" data-modal-scroll>
+        <div class="modal-content" data-modal-scroll tabindex="0" role="region" aria-label="관광 자원 상세 내용">
           <section class="modal-section modal-home is-active" id="modal-home">
             <div class="modal-date"><span>기존 조사 기록일</span><strong>2026년 08월 27일</strong></div>
             <div class="modal-overview"><span>자원적 특성 및 유래 개요</span><p class="modal-description" data-modal-description></p></div>
@@ -92,11 +93,14 @@
           </section>
           <section class="modal-section modal-review" id="modal-review">
             <div class="modal-section-title"><p>03 / VISITOR NOTE</p><h3>방문자 후기</h3><span>기존 자료 · 후기 출처 확인 필요</span></div>
-            <p class="content-note">아래 문구는 기존 조사 자료의 후기입니다. 작성자·원문 출처와 실제 방문 여부는 확인 전이며, 오브의 경험이나 검증된 후기로 인용하지 않습니다.</p><div class="review-list" data-modal-reviews></div>
+            <div class="visitor-notes"><h4>이 장소, 어떻게 느끼셨나요?</h4><p class="content-note">직접 방문한 소감을 남겨 주세요. 닉네임과 후기는 관리자 확인 후 공개됩니다. 실명·연락처 등 개인정보는 적지 마세요.</p>
+            <form id="visitor-review-form"><label>닉네임 (선택)<input name="nickname" maxlength="20" placeholder="미입력 시 방문자" autocomplete="off"></label><label>방문 소감<textarea name="message" minlength="10" maxlength="600" rows="4" required placeholder="방문한 장소에 대한 소감을 10~600자로 적어 주세요."></textarea></label><label class="review-consent"><input name="consent" type="checkbox" required>닉네임과 후기의 공개에 동의합니다.</label><button type="submit" disabled>후기 등록</button><p id="review-submit-status" role="status">후기 연결 상태를 확인하고 있습니다.</p></form>
+            <h4>방문자가 남긴 이야기</h4><div id="visitor-review-list" class="review-list" aria-live="polite"></div><button id="more-visitor-reviews" type="button" hidden>후기 더 보기</button><button id="retry-visitor-reviews" type="button" hidden>다시 불러오기</button></div>
+            <h4 class="research-review-heading">기존 조사 자료의 후기</h4><p class="content-note">아래 문구는 기존 조사 자료의 후기입니다. 작성자·원문 출처와 실제 방문 여부는 확인 전이며, 오브의 경험이나 검증된 후기로 인용하지 않습니다.</p><div class="review-list" data-modal-reviews></div>
           </section>
         </div>
       </div>
     </article>
   </div>
-  <script src="js/report.js"></script>
+  <script src="js/report.js?v=20261026-scroll1"></script>
 </body></html>

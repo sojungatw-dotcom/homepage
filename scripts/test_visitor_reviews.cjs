@@ -1,0 +1,33 @@
+/* Disposable PostgreSQL: public submission, moderation, and private pending reviews. */
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const {PGlite}=require(process.env.PGLITE_MODULE||'@electric-sql/pglite');
+(async()=>{
+ const db=new PGlite();
+ await db.exec(`create role anon;create role authenticated;create schema auth;create table auth.users(id uuid primary key);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;grant usage on schema auth to authenticated;grant execute on function auth.uid() to authenticated;create table public.chatbot_admins(user_id uuid);insert into public.chatbot_admins values('11111111-1111-1111-1111-111111111111');create function public.is_chatbot_admin() returns boolean language sql security definer set search_path='' as $$select exists(select 1 from public.chatbot_admins where user_id=auth.uid())$$;revoke all on public.chatbot_admins from public,anon,authenticated;`);
+ await db.exec(fs.readFileSync('supabase/visitor-reviews.sql','utf8'));
+ await db.exec(fs.readFileSync('supabase/visitor-reviews-deletion.sql','utf8'));
+ const role=async(name,id='')=>{await db.exec('reset role');await db.query("select set_config('request.jwt.claim.sub',$1,false)",[id]);await db.exec('set role '+name);};
+ const submit=(id,place='oryukdo',consent=true,message='직접 방문해 본 바다 풍경이 좋았습니다.')=>db.query('select public.submit_visitor_review($1,$2,$3,$4,$5)',[id,place,'방문자',message,consent]);
+ const remove=(id,deleted=true)=>db.query('select public.set_visitor_review_deleted($1,$2)',[id,deleted]);
+ const list=place=>db.query('select * from public.list_visitor_reviews($1,0)',[place]);
+ const id='33333333-3333-3333-3333-333333333333';
+ await role('anon');await assert.rejects(()=>submit(id,'oryukdo',false),/consent/);await assert.rejects(()=>submit(id,'other'),/check constraint/);await assert.rejects(()=>submit(id,'oryukdo',true,'짧음'),/check constraint/);
+ await assert.rejects(()=>remove(id),/permission denied/);
+ await submit(id);await submit(id);assert.equal((await list('oryukdo')).rows.length,0);await assert.rejects(()=>db.query('select * from public.visitor_reviews'),/permission denied/);await assert.rejects(()=>db.query("update public.visitor_reviews set status='published'"),/permission denied/);
+ await role('authenticated','22222222-2222-2222-2222-222222222222');await assert.rejects(()=>remove(id),/Administrator access required/);await assert.rejects(()=>remove(id,false),/Administrator access required/);await assert.rejects(()=>db.query("update public.visitor_reviews set deleted_at=now()"),/permission denied/);await assert.rejects(()=>db.query('delete from public.visitor_reviews'),/permission denied/);assert.equal((await db.query('select * from public.visitor_reviews')).rows.length,0);assert.equal((await db.query("update public.visitor_reviews set status='published' returning *")).rows.length,0);
+ await role('authenticated','11111111-1111-1111-1111-111111111111');assert.equal((await db.query('select * from public.visitor_reviews')).rows.length,1);await assert.rejects(()=>db.query("update public.visitor_reviews set message='changed'"),/permission denied/);await db.query("update public.visitor_reviews set status='published'");
+ await role('anon');assert.equal((await list('oryukdo')).rows.length,1);assert.equal((await list('beomeosa')).rows.length,0);assert.deepEqual(Object.keys((await list('oryukdo')).rows[0]),['nickname','message','created_at']);
+ await role('authenticated','11111111-1111-1111-1111-111111111111');await db.query("update public.visitor_reviews set status='hidden'");await role('anon');assert.equal((await list('oryukdo')).rows.length,0);
+ await role('authenticated','11111111-1111-1111-1111-111111111111');
+ await db.query("update public.visitor_reviews set status='published'");
+ await remove(id);const removed=(await db.query('select * from public.visitor_reviews')).rows[0];assert(removed.deleted_at);assert.equal(removed.message,'직접 방문해 본 바다 풍경이 좋았습니다.');
+ await remove(id);assert.deepEqual((await db.query('select deleted_at from public.visitor_reviews')).rows[0].deleted_at,removed.deleted_at);
+ await assert.rejects(()=>db.query('delete from public.visitor_reviews'),/permission denied/);
+ await role('anon');assert.equal((await list('oryukdo')).rows.length,0);await assert.rejects(()=>remove(id,false),/permission denied/);
+ await role('authenticated','11111111-1111-1111-1111-111111111111');await remove(id,false);const restored=(await db.query('select * from public.visitor_reviews')).rows[0];assert.equal(restored.deleted_at,null);assert.equal(restored.status,'pending');assert.equal(restored.message,removed.message);
+ await assert.rejects(()=>remove('44444444-4444-4444-4444-444444444444'),/Review not found/);
+ await role('anon');assert.equal((await list('oryukdo')).rows.length,0);
+ await role('authenticated','11111111-1111-1111-1111-111111111111');await db.query("update public.visitor_reviews set status='published'");await role('anon');assert.equal((await list('oryukdo')).rows.length,1);
+ await db.exec('reset role');const before=JSON.stringify((await db.query('select * from public.visitor_reviews')).rows);await db.exec(fs.readFileSync('supabase/visitor-reviews-deletion.sql','utf8'));assert.equal(JSON.stringify((await db.query('select * from public.visitor_reviews')).rows),before);
+ await db.close();console.log('PASS: consent, validation, idempotent submission, pending privacy, non-admin isolation, admin-only moderation, status-only changes, place filtering, unpublishing, admin-only recoverable deletion/restoration, preserved originals, no auto-publish on restore, denied hard deletion, and idempotent non-destructive migration.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

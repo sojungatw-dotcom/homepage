@@ -11,7 +11,9 @@
       "description": "부산국제영화제 이후에도 살펴볼 영화 세 편을 소개하는 카드뉴스.",
       "instagram": "https://www.instagram.com/p/DejRQ7nk0pO/",
       "youtube": null,
-      "thumbnail": null
+      "thumbnail": "assets/images/contents/biff-cover.jpg",
+      "thumbnail_source": "https://www.instagram.com/p/DejRQ7nk0pO/",
+      "thumbnail_kind": "official-cover"
     },
     {
       "id": "beomeosa",
@@ -22,7 +24,9 @@
       "description": "부산에서 조용히 쉬어 갈 곳을 찾는 사람을 위한 범어사 템플스테이 소개.",
       "instagram": "https://www.instagram.com/p/DerAbx0E4fn/",
       "youtube": null,
-      "thumbnail": null
+      "thumbnail": "assets/images/contents/beomeosa-cover.jpg",
+      "thumbnail_source": "https://www.instagram.com/p/DerAbx0E4fn/",
+      "thumbnail_kind": "official-cover"
     },
     {
       "id": "gukbap",
@@ -55,8 +59,9 @@
       "description": "부산 지명에 담긴 이야기를 전할 자료를 조사하고 있습니다.",
       "instagram": null,
       "youtube": null,
-      "thumbnail": null,
-      "stage": "기획·자료 조사"
+      "thumbnail": "assets/images/contents/place-names-cover.svg",
+      "stage": "기획·자료 조사",
+      "thumbnail_kind": "planning-cover"
     },
     {
       "id": "film-poster",
@@ -67,8 +72,9 @@
       "description": "부산을 영화 포스터로 표현하는 주제를 확정했습니다. 구성과 제작은 준비 중입니다.",
       "instagram": null,
       "youtube": null,
-      "thumbnail": null,
-      "stage": "주제 확정"
+      "thumbnail": "assets/images/contents/film-poster-cover.svg",
+      "stage": "주제 확정",
+      "thumbnail_kind": "planning-cover"
     },
     {
       "id": "first-trip",
