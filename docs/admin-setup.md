@@ -2,13 +2,13 @@
 
 ## 현재 상태
 
-관리자 화면, 실제 챗봇 엔진을 사용하는 초안 미리보기, 초안·게시 버전·문의용 DB 스키마와 공개 챗봇 연동을 구현했습니다. 2026-10-26 `ove-homepage-admin` Supabase 프로젝트를 생성하고 문의·관리자 스키마를 적용했습니다. 공개 연결 설정을 등록했으며, Auth 관리자 계정 생성·권한 등록 및 첫 게시 검증은 진행 중입니다. 문의 접수 활성화에는 운영자 개인정보 안내 값이 필요합니다. 요청한 관리자 아이디는 `admin`입니다. 비밀번호는 Supabase Auth에만 설정하며 HTML·JavaScript·Git 저장소에서 비교하거나 저장하지 않습니다.
+관리자 화면, 실제 챗봇 엔진을 사용하는 초안 미리보기, 초안·게시 버전·문의용 DB 스키마와 공개 챗봇 연동을 구현했습니다. 2026-10-26 `ove-homepage-admin` Supabase 프로젝트를 생성하고 문의·관리자 스키마를 적용했습니다. 공개 연결 설정을 등록했으며, 사용자가 생성한 `admin@admin.com` Auth 계정의 관리자 권한 등록을 완료했으며 첫 게시 검증은 진행 중입니다. 문의 접수 활성화에는 운영자 개인정보 안내 값이 필요합니다. 요청한 관리자 아이디는 `admin`입니다. 비밀번호는 Supabase Auth에만 설정하며 HTML·JavaScript·Git 저장소에서 비교하거나 저장하지 않습니다.
 
 ## 연결 순서
 
 1. 사용할 Supabase 무료 프로젝트를 생성합니다. 계정 접속과 프로젝트 설정은 사용자의 승인이 필요합니다.
 2. SQL Editor에서 `supabase/chatbot-inquiries.sql` → `supabase/chatbot-admin.sql` 순서로 적용합니다. 기존 문의를 삭제하지 않습니다.
-3. Authentication → Users → Add user에서 `admin@ove.example` 계정을 만들고, 사용자가 요청한 초기 비밀번호를 입력합니다. 이메일은 로그인 ID `admin`을 인증 서버에 연결하기 위한 식별자이며 메일 발송용이 아닙니다. 이메일 확인 상태를 활성화합니다. 비밀번호 정책이 달라 거절되면 임의로 다른 비밀번호를 확정하지 않습니다.
+3. Authentication → Users → Add user에서 `admin@admin.com` 계정을 만들고, 사용자가 요청한 초기 비밀번호를 입력합니다. 이메일은 로그인 ID `admin`을 인증 서버에 연결하기 위한 식별자이며 메일 발송용이 아닙니다. 이메일 확인 상태를 활성화합니다. 비밀번호 정책이 달라 거절되면 임의로 다른 비밀번호를 확정하지 않습니다.
 4. SQL Editor에서 `supabase/chatbot-admin-bootstrap.sql`을 실행합니다. 이 이메일의 Auth 사용자 ID만 `chatbot_admins`에 등록합니다. 일반 회원이 로그인해도 관리자 권한은 생기지 않습니다.
 5. 프로젝트 URL과 공개용 publishable/anon key를 `data/chatbot-config.json`의 `supabaseUrl`, `publishableKey`에 넣습니다. `adminEmail`은 위 이메일과 일치시킵니다. service_role/secret key는 브라우저 설정이나 Git에 넣지 않습니다.
 6. 실제 문의 접수를 활성화하려면 같은 파일의 `privacy.controller`, `privacy.contact`, `privacy.retention`에 운영자가 확정한 처리자·개인정보 문의처·보유 기간을 입력합니다. 값이 비어 있으면 기존 문의 양식은 전송 준비 중 상태를 유지합니다.
