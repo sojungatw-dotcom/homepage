@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict'),schema=require('../js/chatbot-schema.js'),base=require('../data/chatbot.json');
+const copy=()=>structuredClone(base);
+assert.deepEqual(schema.validate(base),[]);
+for(const href of ['javascript:alert(1)','data:text/html,hi','//external.example','http://external.example','https://name:secret@external.example','https://example.com/ bad'])assert.equal(schema.safeHref(href),false,href);
+for(const href of ['contents.html','report.html#main','https://www.instagram.com/hello.iamove/'])assert.equal(schema.safeHref(href),true,href);
+let d=copy();d.nodes.home.buttons=[{label:'Missing',next:'not_found'}];assert(schema.validate(d).length);
+d=copy();d.nodes.home.buttons=[{label:'Both',next:'home',href:'index.html'}];assert(schema.validate(d).length);
+d=copy();d.nodes.home.answer='';assert(schema.validate(d).length);
+d=copy();delete d.nodes.fallback;assert(schema.validate(d).length);
+d=copy();d.nodes.prototype={answer:'bad',questions:[],keywords:[],buttons:[]};assert(schema.validate(d).length);
+d=copy();d.ui.form=null;assert(schema.validate(d).length);
+console.log('PASS: existing data, unsafe links, missing graph destinations, ambiguous buttons, invalid answers, reserved IDs, and missing required form fields.');

@@ -1,0 +1,552 @@
+{
+  "version": 1,
+  "ui": {
+    "title": "OVE 안내",
+    "subtitle": "포트폴리오 · 콘텐츠 · 제작 문의",
+    "launcher": "무엇이 궁금하신가요?",
+    "close": "대화창 닫기",
+    "back": "이전으로",
+    "home": "처음으로",
+    "reset": "대화 초기화",
+    "placeholder": "궁금한 내용을 입력해 주세요",
+    "send": "전송",
+    "loadError": "안내 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해 주시기 바랍니다.",
+    "retry": "다시 불러오기",
+    "storageWarning": "브라우저 저장소를 사용할 수 없어 대화 유지가 제한되는 상태입니다.",
+    "empty": "질문을 입력해 주시기 바랍니다.",
+    "resetNotice": "대화와 저장된 상태가 초기화되었습니다.",
+    "form": {
+      "name": "이름",
+      "email": "회신 이메일",
+      "message": "문의 내용",
+      "submit": "동의하고 문의 접수",
+      "pending": "접수 중입니다…",
+      "consent": "개인정보 수집·이용에 동의합니다. (필수)",
+      "notice": "문의 답변을 위해 이름, 이메일, 문의 내용을 수집하는 양식입니다. 동의를 거부할 수 있으며, 거부 시 문의 접수가 제한됩니다.",
+      "unavailable": "현재 문의 접수 연결 및 개인정보 안내를 준비 중입니다. SNS 채널을 이용해 주시기 바랍니다.",
+      "success": "문의가 접수되었습니다. 입력하신 이메일로 회신 예정입니다.",
+      "error": "접수 완료 여부를 확인하지 못했습니다. 입력 내용을 유지한 상태입니다. 잠시 후 다시 시도해 주시기 바랍니다.",
+      "invalid": "이름, 올바른 이메일, 문의 내용과 개인정보 동의를 확인해 주시기 바랍니다."
+    }
+  },
+  "nodes": {
+    "home": {
+      "answer": "안녕하세요! 부산에 사는 AI 인플루언서 오브의 콘텐츠 아카이브 안내예요. 오브는 AI로 제작한 가상 인물이에요. 부산의 맛집, 여행, 숨은 장소와 일상, 그리고 콘텐츠 제작 기록을 살펴보세요.",
+      "buttons": [
+        {
+          "label": "포트폴리오 보기",
+          "next": "portfolio"
+        },
+        {
+          "label": "제작물 보기",
+          "next": "works"
+        },
+        {
+          "label": "제작과정",
+          "next": "process"
+        },
+        {
+          "label": "SNS 문의",
+          "next": "contact"
+        }
+      ],
+      "questions": [
+        "처음으로"
+      ],
+      "keywords": [
+        "시작",
+        "메뉴"
+      ]
+    },
+    "portfolio": {
+      "answer": "관광 자원 조사부터 콘텐츠 기획과 최종 팀 프로젝트까지 정리한 포트폴리오입니다. 상세 프로젝트명과 개인 기여도는 등록 준비 중입니다.",
+      "buttons": [
+        {
+          "label": "관광 자원 조사",
+          "next": "research"
+        },
+        {
+          "label": "최종 프로젝트",
+          "next": "final"
+        },
+        {
+          "label": "Hidden Spot 서비스",
+          "next": "service"
+        },
+        {
+          "label": "담당 역할",
+          "next": "role"
+        },
+        {
+          "label": "성과·배운 점",
+          "next": "results"
+        }
+      ],
+      "questions": [
+        "포트폴리오 보기",
+        "대표 작업 보여줘"
+      ],
+      "keywords": [
+        "포트폴리오",
+        "프로젝트"
+      ]
+    },
+    "research": {
+      "answer": "REPORT에는 오륙도, 범어사 템플스테이, 태종대의 특징과 체험 요소를 정리한 관광 자원 조사표가 있는 페이지입니다.",
+      "buttons": [
+        {
+          "label": "조사표 보기",
+          "href": "report.html"
+        },
+        {
+          "label": "주제 선정",
+          "next": "planning"
+        },
+        {
+          "label": "제작물 보기",
+          "next": "works"
+        }
+      ],
+      "questions": [
+        "어떤 관광지를 조사했나요?"
+      ],
+      "keywords": [
+        "조사",
+        "오륙도",
+        "태종대",
+        "범어사"
+      ]
+    },
+    "final": {
+      "answer": "최종 팀 프로젝트의 배경과 제작 과정을 정리하는 페이지입니다. 현재 프로젝트명, 기간, 팀 구성과 최종 결과물은 등록 준비 중입니다.",
+      "buttons": [
+        {
+          "label": "프로젝트 페이지",
+          "href": "final.html"
+        },
+        {
+          "label": "담당 역할",
+          "next": "role"
+        },
+        {
+          "label": "성과·배운 점",
+          "next": "results"
+        }
+      ],
+      "questions": [
+        "최종 프로젝트가 궁금해요"
+      ],
+      "keywords": [
+        "최종",
+        "팀프로젝트"
+      ]
+    },
+    "service": {
+      "answer": "Hidden Spot은 오브와 연계한 별도 장소 탐색 서비스예요. 공개 프로토타입의 장소 목록과 지역 필터 동작을 확인했어요. Hidden Score의 검증과 개인화·AI 연동은 별도 확인이 필요해요.",
+      "buttons": [
+        {
+          "label": "서비스 소개",
+          "href": "service.html"
+        },
+        {
+          "label": "Hidden Spot 열기",
+          "href": "https://hiddenspot.vercel.app/"
+        },
+        {
+          "label": "오브 브랜드",
+          "next": "brand"
+        }
+      ],
+      "questions": [
+        "Hidden Spot은 무엇인가요?"
+      ],
+      "keywords": [
+        "히든",
+        "hidden",
+        "서비스"
+      ]
+    },
+    "role": {
+      "answer": "담당 역할 안내는 등록 준비 중입니다. 각 프로젝트의 개인 담당 업무, 팀 공동 작업, 기여 범위를 확인한 뒤 안내할 예정입니다.",
+      "buttons": [
+        {
+          "label": "제작과정",
+          "next": "process"
+        },
+        {
+          "label": "성과·배운 점",
+          "next": "results"
+        }
+      ],
+      "questions": [
+        "어떤 역할을 맡았나요?"
+      ],
+      "keywords": [
+        "역할",
+        "기여",
+        "담당"
+      ]
+    },
+    "results": {
+      "answer": "SNS 페이지에는 확인일을 붙인 유튜브 공개 조회 수가 있어요. 도달·참여율·시청 지속 시간은 내부 인사이트 자료가 없어 아직 표시하지 않아요.",
+      "buttons": [
+        {
+          "label": "SNS 대시보드",
+          "href": "sns.html"
+        },
+        {
+          "label": "포트폴리오 보기",
+          "next": "portfolio"
+        }
+      ],
+      "questions": [
+        "성과가 궁금해요"
+      ],
+      "keywords": [
+        "성과",
+        "조회",
+        "참여율",
+        "배운",
+        "수치"
+      ]
+    },
+    "works": {
+      "answer": "공개 콘텐츠 5건과 기획 중 카드뉴스 2건을 정리했어요. 콘텐츠 페이지에서 실제 게시물과 상태를 확인할 수 있어요. 2026년 10월 26일 확인 기준이에요.",
+      "buttons": [
+        {
+          "label": "카드뉴스",
+          "next": "cards"
+        },
+        {
+          "label": "영상",
+          "next": "videos"
+        },
+        {
+          "label": "전체 제작물",
+          "href": "contents.html"
+        },
+        {
+          "label": "카드뉴스 도구",
+          "next": "atelier"
+        }
+      ],
+      "questions": [
+        "제작물 보기",
+        "콘텐츠 보여줘"
+      ],
+      "keywords": [
+        "제작물",
+        "콘텐츠",
+        "결과물"
+      ]
+    },
+    "cards": {
+      "answer": "부산국제영화제와 범어사 템플스테이 카드뉴스가 공개됐어요. 부산 지명 이야기는 자료 조사 중, 부산 영화 포스터 만들기는 주제가 확정된 기획 단계예요. 오륙도 카드 덱은 기존 제작 기록으로 보존하고 있어요.",
+      "buttons": [
+        {
+          "label": "갤러리 보기",
+          "href": "contents.html"
+        },
+        {
+          "label": "오륙도 카드 덱 보기",
+          "href": "oryukdo-cardnews/index.html?card=1"
+        },
+        {
+          "label": "제작과정",
+          "next": "process"
+        }
+      ],
+      "questions": [
+        "카드뉴스 보여줘"
+      ],
+      "keywords": [
+        "카드뉴스",
+        "카드덱"
+      ]
+    },
+    "videos": {
+      "answer": "국밥 브이로그와 UPSIDE DOWN 챌린지 릴스, 오브와 모아의 부산 여행 시작 영상을 공식 채널에서 확인했어요. 개별 영상 링크는 콘텐츠 페이지에 연결해 뒀어요.",
+      "buttons": [
+        {
+          "label": "유튜브 열기",
+          "href": "https://www.youtube.com/channel/UC8eGlGJe2-aL2vwoHGrQ_UA"
+        },
+        {
+          "label": "콘텐츠 갤러리",
+          "href": "contents.html"
+        },
+        {
+          "label": "제작과정",
+          "next": "process"
+        }
+      ],
+      "questions": [
+        "영상 보여줘"
+      ],
+      "keywords": [
+        "영상",
+        "동영상",
+        "비디오"
+      ]
+    },
+    "atelier": {
+      "answer": "CARD ATELIER는 입력한 글로 카드뉴스를 구성하고 편집·내보내기를 할 수 있는 브라우저 도구입니다.",
+      "buttons": [
+        {
+          "label": "CARD ATELIER 열기",
+          "href": "cardnews.html"
+        },
+        {
+          "label": "카드뉴스",
+          "next": "cards"
+        }
+      ],
+      "questions": [
+        "카드뉴스 도구 사용법"
+      ],
+      "keywords": [
+        "atelier",
+        "아틀리에",
+        "도구사용"
+      ]
+    },
+    "process": {
+      "answer": "제작 과정 안내입니다. 상세 작품별 기록은 등록 준비 중이며, 먼저 홈페이지에 정리된 전체 흐름과 조사 과정을 안내하는 메뉴입니다.",
+      "buttons": [
+        {
+          "label": "전체 제작 흐름",
+          "next": "workflow"
+        },
+        {
+          "label": "관광 조사 과정",
+          "next": "planning"
+        },
+        {
+          "label": "제작 도구",
+          "next": "tools"
+        },
+        {
+          "label": "문제 해결 경험",
+          "next": "learning"
+        }
+      ],
+      "questions": [
+        "제작과정",
+        "어떻게 만들었나요?"
+      ],
+      "keywords": [
+        "제작과정",
+        "제작 과정",
+        "만드는",
+        "제작방법"
+      ]
+    },
+    "workflow": {
+      "answer": "전체 흐름은 관광 자원 조사 → 핵심 메시지와 채널 기획 → 이미지·영상 제작 → 업로드와 반응 분석의 4단계입니다.",
+      "buttons": [
+        {
+          "label": "주제 선정",
+          "next": "planning"
+        },
+        {
+          "label": "제작 도구",
+          "next": "tools"
+        },
+        {
+          "label": "완성작 보기",
+          "next": "works"
+        }
+      ],
+      "questions": [
+        "전체 제작 흐름"
+      ],
+      "keywords": [
+        "흐름",
+        "단계",
+        "순서"
+      ]
+    },
+    "planning": {
+      "answer": "관광 자원의 특징과 방문자 관점을 조사한 뒤 콘텐츠 키워드와 채널별 표현 방식을 정리하는 과정입니다. 작품별 실제 선정 이유와 조사 기록은 추가 정리가 필요한 항목입니다.",
+      "buttons": [
+        {
+          "label": "조사 기록",
+          "href": "report.html"
+        },
+        {
+          "label": "전체 제작 흐름",
+          "next": "workflow"
+        }
+      ],
+      "questions": [
+        "주제는 어떻게 선정했나요?"
+      ],
+      "keywords": [
+        "선정",
+        "주제",
+        "기획 의도",
+        "기획의도"
+      ]
+    },
+    "tools": {
+      "answer": "실제 사용한 제작 도구 목록은 등록 준비 중입니다. 도구명과 각 도구를 사용한 작업을 확인한 뒤 안내할 예정입니다.",
+      "buttons": [
+        {
+          "label": "카드뉴스 도구 체험",
+          "next": "atelier"
+        },
+        {
+          "label": "문제 해결 경험",
+          "next": "learning"
+        }
+      ],
+      "questions": [
+        "어떤 도구를 사용했나요?"
+      ],
+      "keywords": [
+        "도구",
+        "프로그램",
+        "툴"
+      ]
+    },
+    "learning": {
+      "answer": "작품별 문제 해결 경험은 등록 준비 중입니다. 어려웠던 점, 해결 방법과 개선 결과를 정리한 뒤 안내할 예정입니다.",
+      "buttons": [
+        {
+          "label": "성과·배운 점",
+          "next": "results"
+        },
+        {
+          "label": "제작물 보기",
+          "next": "works"
+        }
+      ],
+      "questions": [
+        "어려웠던 점은 무엇인가요?"
+      ],
+      "keywords": [
+        "어려",
+        "문제 해결",
+        "문제해결",
+        "개선"
+      ]
+    },
+    "brand": {
+      "answer": "오브(OVE)는 부산에 사는 AI 인플루언서이자 AI로 제작한 가상 인물이에요. 따뜻하고 친근하고, 가끔 엉뚱한 허당미도 있어요. 맛집·여행·숨은 장소·일상을 자기 취향대로 보여줘요.",
+      "buttons": [
+        {
+          "label": "브랜드 가이드",
+          "href": "brand.html"
+        },
+        {
+          "label": "Hidden Spot 서비스",
+          "next": "service"
+        },
+        {
+          "label": "모아 소개",
+          "next": "moa"
+        }
+      ],
+      "questions": [
+        "오브 소개"
+      ],
+      "keywords": [
+        "오브",
+        "ove",
+        "브랜드",
+        "로고",
+        "컬러"
+      ]
+    },
+    "contact": {
+      "answer": "SNS 채널과 제작 문의 안내입니다. 인스타그램과 유튜브를 확인하거나 개인정보 수집·이용 동의 후 문의를 남길 수 있는 메뉴입니다.",
+      "buttons": [
+        {
+          "label": "인스타그램",
+          "href": "https://www.instagram.com/hello.iamove/"
+        },
+        {
+          "label": "유튜브",
+          "href": "https://www.youtube.com/channel/UC8eGlGJe2-aL2vwoHGrQ_UA"
+        },
+        {
+          "label": "제작 문의 남기기",
+          "next": "inquiry"
+        }
+      ],
+      "questions": [
+        "SNS 문의",
+        "SNS 알려줘"
+      ],
+      "keywords": [
+        "sns",
+        "인스타",
+        "유튜브",
+        "연락처"
+      ]
+    },
+    "inquiry": {
+      "answer": "제작·협업 문의 양식입니다. 이름, 회신 이메일과 문의 내용을 입력하고 개인정보 수집·이용에 동의한 경우에만 접수가 가능한 양식입니다.",
+      "buttons": [
+        {
+          "label": "SNS 채널 보기",
+          "next": "contact"
+        }
+      ],
+      "questions": [
+        "협업 문의",
+        "제작 문의 남기기"
+      ],
+      "keywords": [
+        "문의",
+        "협업",
+        "상담",
+        "이메일"
+      ],
+      "form": "inquiry"
+    },
+    "fallback": {
+      "answer": "등록된 안내를 찾지 못했어요. 아래 메뉴를 선택하거나 제작 문의를 남겨주세요.",
+      "buttons": [
+        {
+          "label": "포트폴리오 보기",
+          "next": "portfolio"
+        },
+        {
+          "label": "제작물 보기",
+          "next": "works"
+        },
+        {
+          "label": "제작과정",
+          "next": "process"
+        },
+        {
+          "label": "SNS 문의",
+          "next": "contact"
+        },
+        {
+          "label": "제작 문의 남기기",
+          "next": "inquiry"
+        }
+      ],
+      "questions": [],
+      "keywords": []
+    },
+    "moa": {
+      "answer": "모아(MOA)는 오브와 함께 등장하는 치즈 고양이예요. 파란 스카프와 MOA 팬던트를 착용하고, 시크하고 무심하지만 호기심이 많아요. 귀와 꼬리, 움직임으로 감정을 표현하며 부산 콘텐츠에 예상 밖의 재미를 더해요.",
+      "buttons": [
+        {
+          "label": "오브와 모아 소개",
+          "href": "brand.html"
+        }
+      ],
+      "questions": [
+        "모아는 누구야?"
+      ],
+      "keywords": [
+        "모아",
+        "moa"
+      ]
+    }
+  }
+}

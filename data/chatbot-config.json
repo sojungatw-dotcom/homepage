@@ -1,0 +1,12 @@
+{
+  "supabaseUrl": "",
+  "publishableKey": "",
+  "rpc": "submit_chatbot_inquiry",
+  "privacy": {
+    "controller": "",
+    "contact": "",
+    "retention": ""
+  },
+  "consentVersion": "2026-10-26-v1",
+  "adminEmail": "admin@ove.example"
+}
