@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   videos.forEach(video=>{
     video.addEventListener('play',()=>videos.forEach(other=>{if(other!==video)other.pause();}));
     video.addEventListener('error',()=>{
-      const note=document.querySelector('#media-status');note.hidden=false;note.textContent='영상 재생을 완료하지 못했습니다. 카드 아래의 최종 영상 파일 링크로 다시 열어 주세요.';
+      const note=document.querySelector('#media-status');note.hidden=false;note.textContent='영상 재생을 완료하지 못했습니다. Instagram 또는 YouTube 로고를 눌러 게시물을 확인해 주세요.';
     });
   });
   let catalogPromise=null;

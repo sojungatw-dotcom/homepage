@@ -36,9 +36,15 @@
 .video-thumb{padding:0;background:#17253e}
 .video-thumb video{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:contain;background:#17253e}
 
-.inline-carousel .carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;display:grid;place-items:center;width:44px;height:48px;background:rgba(255,245,230,.95);border:1px solid rgba(36,90,196,.25);color:#245AC4;font-size:26px;line-height:1;cursor:pointer}
+.inline-carousel .carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;display:grid;place-items:center;width:44px;height:48px;background:transparent;border:0;box-shadow:none;color:#245AC4;font-size:32px;font-weight:700;line-height:1;text-shadow:0 0 4px #fff,0 1px 6px rgba(255,255,255,.9);cursor:pointer}
 .inline-carousel .carousel-prev{left:12px}.inline-carousel .carousel-next{right:12px}
 .inline-carousel .carousel-arrow:disabled{opacity:.35;cursor:default}
 .inline-carousel .carousel-page{position:absolute;right:12px;bottom:12px;z-index:2;padding:6px 10px;background:rgba(255,245,230,.95);color:#245AC4;font-size:12px;font-weight:700}
 .inline-carousel:focus-visible,.carousel-arrow:focus-visible{outline:3px solid var(--ove-orange);outline-offset:-3px}
 .content-card:hover .inline-carousel{transform:none}
+
+.content-links .content-social-link{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:transparent;color:var(--ove-main-blue)}
+.content-social-link svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.content-social-link :is(.social-dot,.social-play){fill:currentColor;stroke:none}
+.content-links .content-social-link:is(:hover,:focus-visible){color:var(--ove-orange)}
+.content-social-link:focus-visible{outline:2px solid var(--ove-main-blue);outline-offset:2px}
