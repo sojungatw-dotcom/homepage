@@ -8,3 +8,55 @@
 .modal-content{overflow:hidden;scroll-behavior:auto}
 .modal-section{display:none;height:100%;min-height:0}
 .modal-section.is-active{display:block}
+
+/* OVE CI 컬러 적용 */
+:root{--modal-accent:#245AC4;--modal-accent-soft:#E5EDF9}
+.modal-backdrop{background:rgba(0,0,0,.56)}
+.modal-sidebar{background:#FFF5E6}
+.modal-date strong{background:#FFF5E6}
+.modal-program{background:rgba(229,237,249,.12)}
+.program-card{border-color:rgba(36,90,196,.16)}
+.modal-review{background:#E5EDF9}
+
+/* Every tab remains readable at small heights and with enlarged text. */
+.modal-backdrop{backdrop-filter:none}
+.modal-dialog{border-radius:0;border:0;box-shadow:0 18px 60px rgba(0,0,0,.18)}
+.modal-side-figure,.modal-side-card,.modal-description{border-radius:0}
+.modal-category{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:28px 72px 0 24px}
+.modal-category button{min-width:0;padding:14px 8px;font-size:12px}
+.modal-category button:last-child{border-right:0}
+.modal-category button:is(:hover,.is-active){color:#fff}
+.modal-content{overflow-y:auto;overscroll-behavior:contain;scroll-behavior:auto}
+.modal-section{height:auto;min-height:100%}
+.modal-side-card dl{overflow-wrap:anywhere}
+.modal-side-card dd{font-size:13px}
+.modal-side-image>span{padding:4px 7px;background:rgba(0,0,0,.6);font-size:10px}
+.program-card{grid-template-columns:minmax(120px,.8fr) minmax(0,1fr);padding:16px;gap:10px 20px}
+.program-card figure{width:100%;height:auto;aspect-ratio:4/3;align-self:start}
+.program-card h4{font-size:16px}
+.program-card p{font-size:13px;line-height:1.75}
+.resource-action{color:var(--accent-text)}
+@media(max-width:900px){
+ .modal-dialog{grid-template-rows:auto minmax(0,1fr)}
+ .modal-sidebar{grid-template-columns:120px minmax(0,1fr);padding:18px 64px 18px 18px;max-height:32dvh;overflow-y:auto}
+ .modal-sidebar-title{display:none}
+ .modal-side-figure,.modal-side-card{margin-top:0}
+ .modal-side-card{border:0;padding:0}
+ .modal-side-card dl{display:block}
+ .modal-side-card dl>div:nth-child(2){display:none}
+ .modal-category{margin:16px 18px 0}
+ .modal-close{width:44px;height:44px}
+ .modal-close span{left:12px;top:21px}
+}
+@media(max-width:600px){
+ .modal-sidebar{grid-template-columns:88px minmax(0,1fr);gap:12px}
+ .modal-side-card h2{font-size:18px}
+ .modal-side-card dd{font-size:11px}
+ .modal-section{padding:24px 20px 36px}
+ .program-card{grid-template-columns:1fr;padding:0 0 22px;border:0;border-bottom:1px solid var(--line);background:transparent;gap:10px}
+ .program-card figure{grid-row:auto;aspect-ratio:16/10}
+ .program-card h4{font-size:17px}
+ .program-card p{font-size:14px}
+ .modal-section-title h3{font-size:30px}
+ .review-entry{padding-inline:0}
+}

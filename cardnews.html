@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="글을 붙여넣으면 바로 카드뉴스 덱으로 구성해주는 브라우저 스튜디오입니다.">
   <title>Card Atelier — 카드뉴스 스튜디오</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/cardnews.css">
-  <script src="js/cardnews.js" defer></script>
+  <meta name="theme-color" content="#FFF5E6">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="Journey Archive">
+  <meta property="og:title" content="Card Atelier — 카드뉴스 스튜디오">
+  <meta property="og:description" content="글을 붙여넣으면 바로 카드뉴스 덱으로 구성해주는 브라우저 스튜디오입니다.">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/reset.css?v=20261015-ove3">
+  <link rel="stylesheet" href="css/fonts.css?v=20261015-ove3">
+  <link rel="stylesheet" href="css/cardnews.css?v=20261015-ove3">
+  <script src="js/cardnews.js?v=20261015-ove3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#editor-stage">에디터 바로가기</a>
   <header class="app-header">
     <a class="studio-brand" href="contents.html" aria-label="콘텐츠 아카이브로 돌아가기">
-      <span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+      <img class="studio-logo" src="assets/images/brand/ove-mark-blue.svg" alt="오브 OVE" width="1150" height="550">
       <span><b>CARD ATELIER</b><small>by Journey Archive</small></span>
     </a>
     <div class="header-center" aria-label="저장 상태"><span class="save-dot"></span><span id="saveStatus">모든 변경사항 저장됨</span></div>

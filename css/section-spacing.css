@@ -1,0 +1,98 @@
+:root {
+  --section-space: clamp(88px, 11vw, 160px);
+  --section-space-compact: clamp(64px, 8vw, 112px);
+}
+
+/* 페이지 도입부와 첫 콘텐츠 사이의 리듬 */
+.page-hero,
+.brand-hero {
+  padding-bottom: clamp(54px, 7vw, 90px);
+}
+
+/* 같은 배경 위에 연속되는 주요 단락은 선과 여백으로 분리 */
+body[data-page="home"] .intro-section,
+body[data-page="final"] .project-overview,
+body[data-page="contents"] .content-section {
+  border-top: 1px solid var(--line);
+}
+
+body[data-page="home"] .intro-section,
+body[data-page="final"] .project-overview {
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
+}
+
+body[data-page="home"] .archive-section {
+  padding-top: var(--section-space-compact);
+  padding-bottom: var(--section-space-compact);
+}
+
+body[data-page="report"] .content-section,
+body[data-page="contents"] .content-section,
+body[data-page="final"] .content-section {
+  padding-top: var(--section-space-compact);
+  padding-bottom: var(--section-space-compact);
+}
+
+body[data-page="report"] .content-section + .content-section {
+  border-top: 1px solid var(--line);
+}
+
+/* 배경색이 바뀌는 섹션도 위아래 호흡을 동일하게 정리 */
+body[data-page="report"] .metric-band,
+body[data-page="sns"] .dashboard-section,
+body[data-page="final"] .process-section {
+  margin-top: 0;
+}
+
+body[data-page="sns"] .dashboard-section {
+  padding-top: var(--section-space-compact);
+  padding-bottom: var(--section-space-compact);
+}
+
+/* BRAND: 번호가 붙은 각 가이드 단락을 독립된 장으로 구분 */
+body[data-page="brand"] .identity-section,
+body[data-page="brand"] .palette-section,
+body[data-page="brand"] .spec-section,
+body[data-page="brand"] .dont-section,
+body[data-page="brand"] .background-section {
+  padding-top: var(--section-space-compact);
+  padding-bottom: var(--section-space-compact);
+}
+
+body[data-page="brand"] .palette-section,
+body[data-page="brand"] .spec-section,
+body[data-page="brand"] .dont-section,
+body[data-page="brand"] .background-section {
+  border-top: 1px solid var(--line);
+}
+
+body[data-page="brand"] .spec-section {
+  align-items: start;
+}
+
+/* 마지막 단락과 푸터 사이에 중복된 큰 공백이 생기지 않도록 정리 */
+body[data-page="home"] .site-footer,
+body[data-page="report"] .site-footer,
+body[data-page="contents"] .site-footer,
+body[data-page="sns"] .site-footer,
+body[data-page="final"] .site-footer,
+body[data-page="brand"] .site-footer {
+  margin-top: 0;
+}
+
+@media (max-width: 700px) {
+  :root {
+    --section-space: 78px;
+    --section-space-compact: 58px;
+  }
+
+  .page-hero,
+  .brand-hero {
+    padding-bottom: 48px;
+  }
+
+}
+/* A single divider anchors each section; avoid stacking empty rules. */
+body[data-page="contents"] .content-section{border-top:0;padding-top:32px}
+body[data-page="report"] .content-section+.content-section{border-top:0}

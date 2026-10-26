@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: '부산광역시 남구 오륙도로 137', visit: '09:00—18:00 · 17:50 입장 마감 · 맑은 날 추천',
       images: {
         hero: 'assets/images/report/oryukdo/hero-original.jpg',
-        programs: ['assets/images/report/oryukdo/program-skywalk.png', 'assets/images/report/oryukdo/program-trail.png', 'assets/images/report/oryukdo/program-park.png'],
+        programs: ['assets/images/report/oryukdo/program-skywalk.webp', 'assets/images/report/oryukdo/program-trail.webp', 'assets/images/report/oryukdo/program-park.webp'],
         reviews: ['assets/images/report/oryukdo/review-coast.png', 'assets/images/report/oryukdo/review-skywalk-original.jpg']
       },
       programs: [
@@ -46,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
       tags: ['#태종대', '#태종대유원지', '#부산힐링여행', '#부산숨은명소'],
       location: '부산광역시 영도구 전망로 24', visit: '맑은 날 오전—해질녘 추천 · 신선바위·망부석 진입로 출입 통제 중',
       images: {
-        hero: 'assets/images/report/taejongdae/hero.jpg',
+        hero: 'assets/images/report/taejongdae/hero.webp',
         programs: [
-          'assets/images/report/taejongdae/program-danubi.jpg',
-          'assets/images/report/taejongdae/program-lighthouse.jpg',
-          'assets/images/report/taejongdae/program-trail.jpg'
+          'assets/images/report/taejongdae/program-danubi.webp',
+          'assets/images/report/taejongdae/program-lighthouse.webp',
+          'assets/images/report/taejongdae/program-trail.webp'
         ]
       },
       programs: [
@@ -74,7 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setText = (selector, value) => { modal.querySelector(selector).textContent = value; };
   const setActiveCategory = targetId => {
-    categoryButtons.forEach(button => button.classList.toggle('is-active', button.dataset.modalTarget === targetId));
+    categoryButtons.forEach(button => {
+      const active = button.dataset.modalTarget === targetId;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+      button.setAttribute('aria-controls', button.dataset.modalTarget);
+    });
     modal.querySelectorAll('.modal-section').forEach(section => {
       section.classList.toggle('is-active', section.id === targetId);
     });
@@ -110,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollArea.scrollTop = 0;
     modal.hidden = false;
     document.body.classList.add('modal-open');
+    document.querySelectorAll('body > header, body > main, body > footer').forEach(el => { el.inert = true; });
     requestAnimationFrame(() => {
       scrollArea.scrollTop = 0;
       setActiveCategory('modal-home');
@@ -129,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.classList.remove('is-open');
     modal.hidden = true;
     document.body.classList.remove('modal-open');
+    document.querySelectorAll('body > header, body > main, body > footer').forEach(el => { el.inert = false; });
     opener?.focus();
   };
 
@@ -148,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal.hidden) return;
     if (event.key === 'Escape') closeModal();
     if (event.key === 'Tab') {
-      const focusable = [...modal.querySelectorAll('button:not([tabindex="-1"])')];
+      const focusable = [...modal.querySelectorAll('.modal-dialog button:not([tabindex="-1"])')];
       const first = focusable[0], last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
