@@ -16,7 +16,7 @@
 .content-thumb:has(.content-cover) .thumb-label{background:var(--ove-cream);color:var(--ink);padding:5px 8px}
 .status-filter{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 12px}.status-filter button{border:1px solid var(--line);padding:9px 13px;font-size:13px;cursor:pointer}.status-filter button.is-active{background:var(--ove-main-blue);color:#fff;border-color:var(--ove-main-blue)}
 .publication-timeline{margin-top:22px}.publication-timeline li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;border-bottom:1px solid var(--line);padding:14px 0;font-size:14px}.publication-timeline time{color:var(--muted);font-size:12px}.publication-timeline a{text-decoration:underline;text-underline-offset:4px}
-.publication-donut{background:conic-gradient(var(--ove-main-blue) 0 40%,var(--ove-orange) 40%)}
+.publication-donut{background:conic-gradient(var(--ove-main-blue) 0 33.3333%,var(--ove-orange) 33.3333%)}
 .dashboard-metrics .accent-metric small{color:rgba(255,255,255,.9)}
 .insight-note{margin-top:24px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;line-height:1.8}.insight-note h3{margin-bottom:8px;font-size:16px}
 .ranking>div>span:last-child{font-size:11px;color:var(--muted)}.ranking img{object-fit:cover}

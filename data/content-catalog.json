@@ -1,6 +1,6 @@
 {
-  "checked_on": "2026-10-26",
-  "date_basis": "사용자 제공 업로드 이력 우선. 첫 여행 영상은 공식 Instagram 공개 날짜. 국밥 영상의 Instagram 메타 날짜(10/20)와 사용자 기록(10/21)은 차이가 있어 사용자 기록을 유지.",
+  "checked_on": "2026-10-27",
+  "date_basis": "사용자 제공 업로드 이력 우선. 첫 여행 영상은 공식 Instagram 공개 날짜. 국밥 영상의 Instagram 메타 날짜(10/20)와 사용자 기록(10/21)은 차이가 있어 사용자 기록을 유지. 부산 룩북은 운영자가 2026-10-27에 전날 업로드했다고 확인한 이력을 반영.",
   "items": [
     {
       "id": "biff",
@@ -115,6 +115,20 @@
       "video": "assets/videos/ove-upside-down-final.mp4",
       "duration": 9,
       "media_source": "사용자 제공 최종 영상의 웹용 사본"
+    },
+    {
+      "id": "lookbook",
+      "title": "오브 부산 룩북",
+      "category": "video",
+      "date": "2026-10-26",
+      "status": "published",
+      "description": "오브의 취향으로 담아낸 부산 룩북 영상.",
+      "instagram": null,
+      "youtube": null,
+      "thumbnail": "assets/images/contents/ove-busan-lookbook-final-poster.jpg",
+      "video": "assets/videos/ove-busan-lookbook-final.mp4",
+      "media_source": "사용자 제공 최종 영상의 웹용 사본",
+      "duration": 12.96
     },
     {
       "id": "place-names",
