@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "python3 scripts/build_vercel.py",
+  "outputDirectory": "public",
+  "functions": {
+    "api/parking.py": {
+      "maxDuration": 60,
+      "includeFiles": "server/**",
+      "excludeFiles": "{assets/**,oryukdo-cardnews/**,public/**,scripts/**,docs/**,supabase/**,.env*,**/__pycache__/**}"
+    }
+  }
+}

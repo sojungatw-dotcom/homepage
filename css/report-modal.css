@@ -76,3 +76,17 @@
 #visitor-review-list time{margin-left:auto;font-size:12px;color:var(--muted)}
 .modal-content:focus-visible{outline:2px solid var(--modal-accent);outline-offset:-3px}
 @media(max-width:600px){#visitor-review-form input:not([type=checkbox]),#visitor-review-form textarea{font-size:16px}}
+
+/* Nearby parking, using the same cards and accent as the research modal. */
+.parking-list{display:grid;gap:14px;margin:20px 0}
+.parking-card{padding:20px;border:1px solid var(--line);background:var(--white)}
+.parking-card h4{font-size:18px;margin-bottom:10px}
+.parking-card p{font-size:14px;line-height:1.7;color:var(--muted)}
+.parking-card a{display:inline-block;margin-top:14px;color:var(--modal-accent);font-size:14px}
+#parking-status{margin-top:20px;font-size:14px;line-height:1.7}
+#parking-retry{padding:12px 18px;background:var(--modal-accent);color:white;cursor:pointer;font-size:13px}
+#parking-retry:disabled{opacity:.5;cursor:wait}
+.modal-category{overflow-x:auto}
+.modal-category button{flex-shrink:0}
+.modal-category{display:flex}
+.modal-category button{flex:1 0 100px}

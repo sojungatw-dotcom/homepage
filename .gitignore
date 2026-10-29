@@ -1,2 +1,11 @@
 .DS_Store
 **/.DS_Store
+.env
+.env.*
+!.env.example
+
+# Generated deployment output and Python cache
+/public/
+/.vercel/
+__pycache__/
+*.pyc
